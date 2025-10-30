@@ -1,0 +1,130 @@
+{
+  "sections": [
+    {
+      "title": "Horror",
+      "ico" : "fa-solid fa-skull",
+      "movies": [
+        {
+          "title": "Siccin 8",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://www.dropbox.com/scl/fi/wlh1wxx0fr1n3khxhtzjm/sijjin-8.jpg?rlkey=r7g397rutjjdfxiinoaehge0p&st=ejn9aoxe&dl=0"
+        },
+        {
+          "title": "Traumatika",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://www.dropbox.com/scl/fi/9yr83sxk9vn5xealqr0pg/images.jpeg?rlkey=sbyimemhwed4up4an3o7fkjxh&st=vnvrj1s2&dl=0"
+        },
+        {
+          "title": "Nosferatu",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://www.dropbox.com/scl/fi/sweboxe0bqge46ogjrlaz/Nosferatu.jpg?rlkey=6v2q1s6svdw0x3jx1kl4lu3f4&st=y5kiywd1&dl=0"
+        },
+        {
+          "title": "The Damned",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/Hnb1V5Rc/the-damned.jpg"
+        },
+        {
+          "title": "Shelby Oaks",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/zGB2QK7g/Shelby-Oaks.jpg"
+        },
+        {
+          "title": "Clown in a Cornfield",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/vBrLSZVT/Clown-in-a-Cornfield.jpg"
+        },
+        {
+          "title": "The Nun",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/2jHBjWmg/The-Nun.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Action",
+      "ico": "fa-solid fa-gun",
+      "movies": [
+        {
+          "title": "Spider-Man:<br>Brand New Day",
+          "price": "Comming soon",
+          "color": "rgb(177, 1, 124)",
+          "poster": "https://i.postimg.cc/y85jBJn4/Spider-Man-Brand-New-Day.jpg"
+        },
+        {
+          "title": "John Wick:<br>Chapter 3-Parabellum",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/K8ScVbg7/John-wisk-chap-3.jpg"
+        },
+        {
+          "title": "No Time To Die",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/QxVSPGrC/no-time-to-die.jpg"
+        },
+        {
+          "title": "The Killer",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/vHhRbd1F/the-killer.jpg"
+        },
+        {
+          "title": "The Amazing <br> Spider-Man (2012)",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/8zNV8mNK/the-amazing-spiderman.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Romantic",
+      "ico": "fa-solid fa-heart",
+      "movies": [
+        {
+          "title": "Anyone but you",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/3RmmZsJH/anyone-but-u.jpg"
+        },
+        {
+          "title": "The Idea of you",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/8C24mBG2/the-idea-of-u.jpg"
+        },
+        {
+          "title": "Love at First Sight",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/2Scry3Yz/love-at-first-sight.jpg"
+        },
+        {
+          "title": "Your Place or Mine",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/kXCKQQYx/your-place-or-mine.jpg"
+        },
+        {
+          "title": "It Ends With Us",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/FHcMMQVN/it-ends-with-us.jpg"
+        },
+        {
+          "title": "Titanic",
+          "price": "Free",
+          "color": "#695CFE",
+          "poster": "https://i.postimg.cc/Hxhzd8ZN/Titanic.jpg"
+        }
+      ]
+    }
+  ]
+}

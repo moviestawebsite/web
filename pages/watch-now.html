@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moviesta | Watch now</title>
+    <script src="../assets/server/js/proxy.js"></script>
+    <link rel="stylesheet" href="../assets/css/video-style.css">
+    <link rel="stylesheet" href="../assets/css/index-style.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.1.0/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../images/logo-circle.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+
+<body>
+    <div class="loading">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="loading1" id="popupLoader">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav class="site-nav">
+        <button class="sidebar-toggle"><span class="material-symbols-outlined">menu</span></button>
+    </nav>
+    <div class="container">
+        <aside class="sidebar closed">
+            <header class="sidebar-header">
+                <img src="../images/logo.png" class="header-logo" alt="logo">
+                <span class="header-title">Moviesta</span>
+                <button class="sidebar-toggle">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+            </header>
+
+            <div class="sidebar-content">
+                <form action="#" class="search" style="cursor: not-allowed;">
+                    <span class="material-symbols-outlined">search</span>
+                    <input style="cursor: not-allowed;" type="search" placeholder="Search..." disabled>
+                    <i class="fa-solid fa-xmark clear-search"></i>
+                </form>
+
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a href="../index.html" class="menu-link" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">home</span>
+                            <span class="menu-lab">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="watch-now.html" class="menu-link active" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">live_tv</span>
+                            <span class="menu-lab">Watch now</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="movies.html" class="menu-link" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">movie</span>
+                            <span class="menu-lab">Movies</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="recently.html" class="menu-link" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">history</span>
+                            <span class="menu-lab">Recently</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="favourites.html" class="menu-link" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">favorite</span>
+                            <span class="menu-lab">Favorites</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="notifications.html" class="menu-link" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span class="menu-lab">Notifications</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="requst.html" class="menu-link" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined">add_comment</span>
+                            <span class="menu-lab">Request</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-bot">
+                <button class="theme-tog">
+                    <div class="theme-lab">
+                        <span class="theme-ico material-symbols-outlined">dark_mode</span>
+                        <span class="theme-text">Dark Mode</span>
+                    </div>
+                    <div class="theme-tog-track">
+                        <div class="theme-indic"></div>
+                    </div>
+                </button>
+            </div>
+        </aside>
+        <div class="main-cont" id="mainContainer">
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <script src="../assets/js/watch-now.js"></script>
+    <script src="../assets/js/loader.js"></script>
+</body>
+
+</html>

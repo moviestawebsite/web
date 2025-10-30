@@ -1,0 +1,2 @@
+Start PHP: php -S localhost:8000
+Download Stripe For PHP : composer require stripe/stripe-php
