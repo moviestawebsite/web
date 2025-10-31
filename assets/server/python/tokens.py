@@ -1,5 +1,6 @@
 import dropbox
 import json
+import os
 
 print("=== 🔁 Dropbox Refresh Token Generator ===\n")
 
@@ -12,11 +13,10 @@ for i in range(1, num_accounts + 1):
     APP_KEY = input("App key: ").strip()
     APP_SECRET = input("App secret: ").strip()
 
-    # بدء عملية المصادقة
     auth_flow = dropbox.DropboxOAuth2FlowNoRedirect(
         APP_KEY,
         APP_SECRET,
-        token_access_type="offline"  # مهم جدًا للحصول على refresh token
+        token_access_type="offline"
     )
 
     authorize_url = auth_flow.start()
@@ -40,8 +40,17 @@ for i in range(1, num_accounts + 1):
     print("Refresh Token:", oauth_result.refresh_token)
     print("Account ID:", oauth_result.account_id)
 
-# حفظها في ملف JSON
-with open("tokens.json", "w", encoding="utf-8") as f:
-    json.dump(tokens_data, f, indent=4)
+# 🔸 تحديد مسار حفظ الملف داخل مجلد Movie\data\base
+save_path = r"D:\Documents\My Programming Projects\Html\Movie\data\base"
 
-print("\n🎉 تم حفظ كل التوكنات في ملف tokens.json بنجاح ✅")
+# تأكد أن المجلد موجود
+os.makedirs(save_path, exist_ok=True)
+
+# 🔸 المسار النهائي للملف
+file_path = os.path.join(save_path, "tokens.json")
+
+# 🔸 حفظ البيانات
+with open(file_path, "w", encoding="utf-8") as f:
+    json.dump(tokens_data, f, indent=4, ensure_ascii=False)
+
+print(f"\n🎉 تم حفظ كل التوكنات في الملف: {file_path} ✅")
