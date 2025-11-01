@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 function renderMediaCard(item) {
   const randomHeight = Math.floor(Math.random() * 120) + 200;
   return `
-    <div class="media-card" data-id="${item.id}" >
+    <div class="media-card" data-id="${item.id}" style="height:${randomHeight}px;">
         <img src="${item.image}" alt="${item.title}" class="media-thumb" />
     </div>
   `;
