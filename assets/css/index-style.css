@@ -686,6 +686,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     box-shadow: 0 4px 10px var(--color-shadow);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     cursor: pointer;
+    background: ;
 }
 
 .media-card:hover {
@@ -710,7 +711,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     transform: translate(-50%, -50%) scale(0);
     font-size: 2.5rem;
     color: white;
-    
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 50%;
     padding: 20px 25px;
     pointer-events: none;
