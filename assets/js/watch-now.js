@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function loadImagesOnly() {
   try {
-    const response = await fetch("../data/json/movies-database.json");
+    const response = await fetch("data/json/movies-database.json");
     const data = await response.json();
 
     const gallery = document.querySelector(".media-gallery");
