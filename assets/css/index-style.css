@@ -679,18 +679,18 @@ body.dark-theme .theme-tog-track .theme-indic {
 
 /* ===================== الكارد ===================== */
 .media-card {
-    flex: 0 0 210px;
-    scroll-snap-align: start;
-    border-radius: 14px;
+    position: relative;
     overflow: hidden;
+    border-radius: 14px;
     box-shadow: 0 4px 10px var(--color-shadow);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
     cursor: pointer;
 }
 
-.media-card:hover {
-    transform: translateY(0);
-    box-shadow: 0 0 10px white;
+.media-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
 }
 
 .media-card img {
@@ -702,7 +702,13 @@ body.dark-theme .theme-tog-track .theme-indic {
     transition: transform 0.25s ease;
 }
 
-.media-card img:hover{
+.media-card:hover {
+    transform: translateY(0);
+    box-shadow: 0 0 10px white;
+}
+
+
+.media-card img:hover {
     transform: scale(1.05);
 }
 
@@ -728,9 +734,9 @@ body.dark-theme .theme-tog-track .theme-indic {
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 20px;
 }
 
 /* ===================== الـ Popup ===================== */
