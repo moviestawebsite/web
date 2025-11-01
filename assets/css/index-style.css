@@ -694,7 +694,6 @@ body.dark-theme .theme-tog-track .theme-indic {
     box-shadow: 0 0 10px white;
 }
 
-/* صورة الكارد */
 .media-card img {
     width: 100%;
     height: 280px;
@@ -702,7 +701,6 @@ body.dark-theme .theme-tog-track .theme-indic {
     transition: opacity 0.3s ease;
 }
 
-/* Overlay عند الـ hover */
 .media-card::after {
     content: "\f04b";
     font-family: "Font Awesome 6 Free";
@@ -720,6 +718,24 @@ body.dark-theme .theme-tog-track .theme-indic {
     transition: transform 0.3s ease;
 }
 
+.media-card:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.media-card h3,
+p {
+    margin: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-align: start;
+    text-transform: capitalize;
+}
+
+.media-card p {
+    color: var(--color-hover-primary);
+    font-weight: 700;
+}
 
 /* ===================== الـ Popup ===================== */
 .popup-overlay {
