@@ -805,3 +805,5 @@ function fixDropboxLinks() {
     }
   });
 }
+
+loadImagesOnly();
