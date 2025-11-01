@@ -162,46 +162,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const gallery = document.querySelector(".media-gallery");
-
-  if (!gallery) {
-    console.error("❌ عنصر .media-gallery مش موجود في الصفحة");
-    return;
-  }
-
-  try {
-    const response = await fetch("../data/json/movies-database.json");
-    if (!response.ok) throw new Error("ملف JSON مش متاح");
-    const data = await response.json();
-
-    if (!data.images || data.images.length === 0) {
-      gallery.innerHTML = "<p>🚫 لا توجد صور لعرضها.</p>";
-      return;
-    }
-
-    gallery.innerHTML = "";
-
-    data.images.forEach((imgURL) => {
-      const fixedURL = fixDropboxLink(imgURL);
-      const img = document.createElement("img");
-      img.src = fixedURL;
-      img.alt = "image";
-      img.loading = "lazy";
-      img.style.width = "200px";
-      img.style.margin = "10px";
-      img.onerror = () => {
-        console.warn("⚠️ فشل تحميل الصورة:", fixedURL);
-      };
-      gallery.appendChild(img);
-    });
-
-  } catch (err) {
-    console.error("💥 خطأ أثناء تحميل الصور:", err);
-    gallery.innerHTML = "<p>❌ حدث خطأ أثناء تحميل الصور.</p>";
-  }
-});
-
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
   const loader1 = document.getElementById("popupLoader");
@@ -811,6 +771,52 @@ function initializeAllVideoPlayers() {
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const gallery = document.querySelector(".media-gallery");
+
+  if (!gallery) {
+    console.error("❌ عنصر .media-gallery مش موجود في الصفحة");
+    return;
+  }
+
+  try {
+    const response = await fetch("data/json/movies-database.json");
+    if (!response.ok) throw new Error("ملف JSON مش متاح");
+    const data = await response.json();
+
+    if (!data.images || data.images.length === 0) {
+      gallery.innerHTML = "<p>🚫 لا توجد صور لعرضها.</p>";
+      return;
+    }
+
+    gallery.innerHTML = "";
+
+    data.images.forEach((imgURL) => {
+      const fixedURL = fixDropboxLink(imgURL);
+      const img = document.createElement("img");
+      img.src = fixedURL;
+      img.alt = "image";
+      img.style.width = "200px";
+      img.style.margin = "10px";
+      img.loading = "lazy";
+      gallery.appendChild(img);
+    });
+
+  } catch (err) {
+    console.error("💥 خطأ أثناء تحميل الصور:", err);
+    gallery.innerHTML = "<p>❌ حدث خطأ أثناء تحميل الصور.</p>";
+  }
+});
+
+function fixDropboxLink(url) {
+  if (!url) return "";
+  return url
+    .replace("www.dropbox.com", "dl.dropboxusercontent.com")
+    .replace("?dl=0", "")
+    .replace("?dl=1", "");
+}
+
 
 function fixDropboxLinks() {
   document.querySelectorAll("img, video, source").forEach((el) => {
