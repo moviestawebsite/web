@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
 
   try {
-    const response = await fetch("../data/json/videos-database.json");
+    const response = await fetch("../data/json/movies-database.json");
     const data = await response.json();
 
     window.mediaData = data.media;
