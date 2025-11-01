@@ -1,16 +1,32 @@
 .live-frame {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 40px auto;
-  width: 100%;
-  height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 100%;
+    height: 400px;
 }
 
 .live-frame iframe {
-  border: none;
-  border-radius: 14px;
-  width: 1200px;
-  height: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 14px;
+    width: 1200px;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.no-live {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    font-size: 1.2rem;
+}
+
+.no-live i {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-accent, #e74c3c);
 }
