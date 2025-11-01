@@ -772,54 +772,47 @@ function initializeAllVideoPlayers() {
   });
 }
 
-// ======================= تحميل الصور من JSON =======================
 document.addEventListener("DOMContentLoaded", async () => {
   const gallery = document.querySelector(".media-gallery");
+
   if (!gallery) {
     console.error("❌ عنصر .media-gallery مش موجود في الصفحة");
     return;
   }
 
   try {
-    // ✅ تحميل ملف JSON
     const response = await fetch("../data/json/movies-database.json");
+    if (!response.ok) throw new Error("ملف JSON مش متاح");
     const data = await response.json();
 
-    // ✅ التأكد من وجود قسم الصور
     if (!data.images || data.images.length === 0) {
-      gallery.innerHTML = "<p style='color:gray;text-align:center;'>No images found</p>";
+      gallery.innerHTML = "<p>🚫 لا توجد صور لعرضها.</p>";
       return;
     }
 
-    // ✅ مساعدة: تصحيح روابط Dropbox
-    const fixDropboxLink = (url) => {
-      if (!url) return url;
-      if (url.includes("dropbox.com")) {
-        return url
-          .replace("www.dropbox.com", "dl.dropboxusercontent.com")
-          .replace("?dl=0", "")
-          .replace("?dl=1", "");
-      }
-      return url;
-    };
+    gallery.innerHTML = "";
 
-    // ✅ إنشاء الصور داخل الـ gallery
-    data.images.forEach((url) => {
+    data.images.forEach((imgURL) => {
+      const fixedURL = fixDropboxLink(imgURL);
       const img = document.createElement("img");
-      img.src = fixDropboxLink(url);
+      img.src = fixedURL;
       img.alt = "image";
+      img.style.width = "200px";
+      img.style.margin = "10px";
       img.loading = "lazy";
-      img.onerror = () => {
-        img.style.display = "none";
-        console.warn("❌ فشل تحميل الصورة:", url);
-      };
       gallery.appendChild(img);
     });
 
-    console.log("✅ تم تحميل الصور بنجاح:", data.images.length);
-
-  } catch (error) {
-    console.error("❌ خطأ أثناء تحميل ملف JSON:", error);
-    gallery.innerHTML = "<p style='color:red;text-align:center;'>Error loading images.</p>";
+  } catch (err) {
+    console.error("💥 خطأ أثناء تحميل الصور:", err);
+    gallery.innerHTML = "<p>❌ حدث خطأ أثناء تحميل الصور.</p>";
   }
 });
+
+function fixDropboxLink(url) {
+  if (!url) return "";
+  return url
+    .replace("www.dropbox.com", "dl.dropboxusercontent.com")
+    .replace("?dl=0", "")
+    .replace("?dl=1", "");
+}
