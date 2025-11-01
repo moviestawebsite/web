@@ -71,7 +71,6 @@ function renderMovieCard(movie) {
   return card;
 }
 
-
 let originalContent = mainContainer.innerHTML;
 
 searchInput.addEventListener("input", async (e) => {
