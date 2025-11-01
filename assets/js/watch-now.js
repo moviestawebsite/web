@@ -167,15 +167,13 @@ async function loadImagesOnly() {
     const response = await fetch("data/json/movies-database.json");
     const data = await response.json();
 
-    // 🖼️ العنصر اللى هيظهر فيه الصور
     const gallery = document.querySelector(".media-gallery");
     gallery.innerHTML = "";
 
-    // ✅ لو عندك جزء خاص بالصور في الـ JSON
     const images = data.images || [];
 
     images.forEach((imgObj) => {
-      const imgURL = fixDropboxLink(imgObj.url || imgObj); // يدعم سواء كائن أو نص
+      const imgURL = fixDropboxLink(imgObj.url || imgObj);
       const img = document.createElement("img");
       img.src = imgURL;
       img.alt = "image";
@@ -184,6 +182,8 @@ async function loadImagesOnly() {
 
   } catch (err) {
     console.error("Error loading images:", err);
+    const gallery = document.querySelector(".media-gallery");
+    gallery.innerHTML = "<p>Failed to load images.</p>";
   }
 }
 
