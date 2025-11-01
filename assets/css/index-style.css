@@ -689,9 +689,10 @@ body.dark-theme .theme-tog-track .theme-indic {
 }
 
 .media-thumb:hover {
+    tra
     transform: translateY(0);
     box-shadow: 0 0 10px white;
-    sca
+    transform: scale(1.05);
 }
 
 .media-thumb {
