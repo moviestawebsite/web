@@ -699,6 +699,11 @@ body.dark-theme .theme-tog-track .theme-indic {
     object-fit: cover;
     transition: opacity 0.3s ease;
     display: block;
+    transition: ;
+}
+
+.media-card img:hover{
+    transform: scale(1.05);
 }
 
 .media-card::after {
