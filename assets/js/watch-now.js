@@ -816,15 +816,3 @@ function fixDropboxLink(url) {
     .replace("?dl=0", "")
     .replace("?dl=1", "");
 }
-
-
-function fixDropboxLinks() {
-  document.querySelectorAll("img, video, source").forEach((el) => {
-    const src = el.getAttribute("src");
-    if (src && src.includes("dropbox.com")) {
-      el.src = src.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "");
-    }
-  });
-}
-
-loadImagesOnly();
