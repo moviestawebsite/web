@@ -1,7 +1,16 @@
-iframe {
-    width: 1200px;
-    height: 500px;
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 0 20px white;
+.live-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  width: 100%;
+  height: 400px;
+}
+
+.live-frame iframe {
+  border: none;
+  border-radius: 14px;
+  width: 70%;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
