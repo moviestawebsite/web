@@ -680,7 +680,6 @@ body.dark-theme .theme-tog-track .theme-indic {
 /* ===================== الكارد ===================== */
 .media-card {
     flex: 0 0 210px;
-    /* حجم كل كارت */
     scroll-snap-align: start;
     background: var(--color-bg-cards);
     border-radius: 14px;
