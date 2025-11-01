@@ -148,8 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-
-
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
