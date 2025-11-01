@@ -69,24 +69,42 @@ async function loadMovies() {
     mainContainer.innerHTML = "";
 
     // ✅ السلايدر الأساسي
-    const sliderHTML = `
-      <div class="slider">
-        <div class="list">
-          <div class="item"><a href="Pages/gta-v.html"><img src="https://i.postimg.cc/76fST5jY/The-Nun-slider.jpg"></a></div>
-          <div class="item"><a href="Pages/gta-iv.html"><img src="https://i.postimg.cc/cHHBM9gP/sijjin-8-slider.jpg"></a></div>
-          <div class="item"><a href="Pages/gta-sa-tde.html"><img src="https://www.dropbox.com/scl/fi/b3jq33s0zshdr2jptoggl/anyone-but-u-slider.jpg?rlkey=8co4p6tevsc8cypn8yh582ab4&st=r5e2hgbc&dl=0"></a></div>
-          <div class="item"><a href="Pages/ac-2.html"><img src="https://i.postimg.cc/RhN0Cf6f/the-idea-of-u-slide.jpg"></a></div>
-          <div class="item"><a href="Pages/ac-mirage.html"><img src="https://i.postimg.cc/J09shB62/the-amazing-spiderman-slide.jpg"></a></div>
+    // ✅ تحميل السلايدر من ملف JSON
+    const sliderData = data.slider || [];
+    if (sliderData.length > 0) {
+      const sliderItemsHTML = sliderData
+        .map((slide) => {
+          const imgURL = fixDropboxLink(slide.img);
+          return `
+        <div class="item">
+          <a href="${slide.link}">
+            <img src="${imgURL}" alt="">
+          </a>
         </div>
-        <div class="buttons">
-          <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
-          <button id="next"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
-        <ul class="dots"><li class="active"></li><li></li><li></li><li></li><li></li></ul>
+      `;
+        })
+        .join("");
+
+      const dotsHTML = sliderData
+        .map((_, i) => `<li${i === 0 ? ' class="active"' : ""}></li>`)
+        .join("");
+
+      const sliderHTML = `
+    <div class="slider">
+      <div class="list">
+        ${sliderItemsHTML}
       </div>
-    `;
-    mainContainer.insertAdjacentHTML("beforeend", sliderHTML);
-    initSlider();
+      <div class="buttons">
+        <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
+        <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+      </div>
+      <ul class="dots">${dotsHTML}</ul>
+    </div>
+  `;
+      mainContainer.insertAdjacentHTML("beforeend", sliderHTML);
+      initSlider();
+    }
+
 
     // ✅ تحميل كل قسم أفلام
     data.sections.forEach((section, index) => {
