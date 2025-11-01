@@ -141,12 +141,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.innerHTML = `
       <div class="live-frame">
-      <iframe src="https://www.youtube.com/embed/live_stream?channel=UCHxZfWDxxumOyTN0nvbRM5A"
-        allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/live_stream?channel=UCHxZfWDxxumOyTN0nvbRM5A" allowfullscreen></iframe>
       </div>
-  <div class="media-grid">
-    ${data.media.map(renderMediaCard).join("")}
-  </div>
+      <div class="media-grid">
+        ${data.media.map(renderMediaCard).join("")}
+      </div>
 `;
 
 
