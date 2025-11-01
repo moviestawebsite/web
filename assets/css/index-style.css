@@ -700,7 +700,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     transition: opacity 0.3s ease;
 }
 
-.media-card::after {
+.media-thumb::after {
     content: "\f04b";
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
@@ -717,7 +717,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     transition: transform 0.3s ease;
 }
 
-.media-card:hover::after {
+.media-thumb:hover::after {
     transform: translate(-50%, -50%) scale(1);
 }
 
