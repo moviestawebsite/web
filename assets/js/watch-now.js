@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
 
   try {
-    const response = await fetch("../data/json/movies-database.json");
+    const response = await fetch("../data/json/videos-database.json");
     const data = await response.json();
 
     window.mediaData = data.media;
@@ -161,6 +161,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
   }
 });
+
+function renderMediaCard(item) {
+  return `
+    <div class="media-card" data-id="${item.id}">
+      <div class="img-box">
+        <img src="${item.image}" alt="${item.title}" class="media-thumb" />
+      </div>
+      <div class="media-info">
+        <h3 class="media-title">${item.title}</h3>
+        <p><i class='fa-solid fa-film'></i> ${item.what}</p>
+      </div>
+    </div>
+  `;
+}
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
