@@ -720,22 +720,6 @@ body.dark-theme .theme-tog-track .theme-indic {
 .media-thumb:hover::after {
     transform: translate(-50%, -50%) scale(1);
 }
-
-.media-card h3,
-p {
-    margin: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    text-align: start;
-    text-transform: capitalize;
-}
-
-.media-card p {
-    color: var(--color-hover-primary);
-    font-weight: 700;
-}
-
 /* ===================== الـ Popup ===================== */
 .popup-overlay {
     position: fixed;
