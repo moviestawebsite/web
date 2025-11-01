@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.mediaData = data.media;
 
     container.innerHTML = `
-                  <iframe width="100%" height="400" src="https://www.youtube.com/embed/live_stream?channel=UCabcd12345xyz"
+                  <iframe width="100%" height="400" src="https://www.youtube.com/embed/live_stream?channel=UCHxZfWDxxumOyTN0nvbRM5A"
                 frameborder="0" allowfullscreen>
             </iframe>
       <div class="media-grid">
