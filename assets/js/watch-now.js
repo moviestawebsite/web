@@ -781,7 +781,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("../data/json/movies-database.json");
+    const response = await fetch("data/json/movies-database.json");
     if (!response.ok) throw new Error("ملف JSON مش متاح");
     const data = await response.json();
 
@@ -809,10 +809,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function fixDropboxLink(url) {
-  if (!url) return "";
-  return url
-    .replace("www.dropbox.com", "dl.dropboxusercontent.com")
-    .replace("?dl=0", "")
-    .replace("?dl=1", "");
+function fixDropboxLinks() {
+  document.querySelectorAll("img, video, source").forEach((el) => {
+    const src = el.getAttribute("src");
+    if (src && src.includes("dropbox.com")) {
+      el.src = src.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "");
+    }
+  });
 }
