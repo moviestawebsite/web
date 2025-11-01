@@ -686,7 +686,6 @@ body.dark-theme .theme-tog-track .theme-indic {
     box-shadow: 0 4px 10px var(--color-shadow);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     cursor: pointer;
-    background: ;
 }
 
 .media-card:hover {
