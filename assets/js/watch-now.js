@@ -55,20 +55,15 @@ function renderMovieCard(movie) {
       ? `<video class="movie-media" autoplay loop muted playsinline><source src="${movie.poster}" type="video/${ext}"></video>`
       : `<img class="movie-media" src="${movie.poster}" alt="${movie.title}">`;
 
-  const card = document.createElement("div");
-  card.classList.add("movie-card");
-  card.innerHTML = `
+  return `
+    <div class="movie-card">
       ${mediaHTML}
       <div class="movie-info">
         <h3>${movie.title}</h3>
         <p style='color:${movie.color};'>${movie.price}</p>
       </div>
+    </div>
   `;
-
-  // 👇 إضافة حدث الفتح هنا
-  card.addEventListener("click", () => openPopup(movie));
-
-  return card;
 }
 
 let originalContent = mainContainer.innerHTML;
@@ -244,7 +239,6 @@ function openPopup(item) {
     initializeAllVideoPlayers();
   }, 3500);
   fixDropboxLinks()
-  loadImages()
 }
 
 // ======================= كود تهيئة مشغل الفيديوهات في الصفحة أو الـ Popup =======================
