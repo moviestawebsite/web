@@ -244,6 +244,7 @@ function openPopup(item) {
     initializeAllVideoPlayers();
   }, 3500);
   fixDropboxLinks()
+  loadImages()
 }
 
 // ======================= كود تهيئة مشغل الفيديوهات في الصفحة أو الـ Popup =======================
