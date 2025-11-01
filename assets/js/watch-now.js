@@ -148,17 +148,30 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-    const liveFrame = document.querySelector(".live-frame iframe");
+    const frame = document.querySelector(".live-frame iframe");
+    const wrapper = document.querySelector(".live-frame");
+
+    // لو حصل خطأ أثناء تحميل iframe
+    frame.addEventListener("error", () => {
+      showNoLive();
+    });
+
+    // نعمل فحص بعد 5 ثواني لو الفيديو مش ظاهر أو unavailable
     setTimeout(() => {
-      if (!liveFrame.contentWindow || liveFrame.contentDocument?.body?.innerHTML.includes("unavailable")) {
-        document.querySelector(".live-frame").innerHTML = `
+      const srcDoc = frame?.contentDocument?.body?.innerText || "";
+      if (!frame.contentWindow || srcDoc.includes("غير متوفر") || srcDoc.includes("unavailable")) {
+        showNoLive();
+      }
+    }, 5000);
+
+    function showNoLive() {
+      wrapper.innerHTML = `
       <div class="no-live">
         <i class="fa-solid fa-video-slash"></i>
         <p>No live yet</p>
       </div>
     `;
-      }
-    }, 5000);
+    }
 
     fixDropboxLinks();
 
