@@ -693,7 +693,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     box-shadow: 0 0 10px white;
 }
 
-.media-card img {
+.media-thumb {
     width: 100%;
     height: 280px;
     object-fit: cover;
