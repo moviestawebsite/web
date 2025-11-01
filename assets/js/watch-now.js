@@ -774,38 +774,37 @@ function initializeAllVideoPlayers() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const gallery = document.querySelector(".media-gallery");
-
   if (!gallery) {
     console.error("❌ عنصر .media-gallery مش موجود في الصفحة");
     return;
   }
 
   try {
-    const response = await fetch("data/json/movies-database.json");
-    if (!response.ok) throw new Error("ملف JSON مش متاح");
-    const data = await response.json();
+    const res = await fetch("../data/json/movies-database.json");
+    if (!res.ok) throw new Error("ملف JSON مش موجود أو المسار غلط");
 
-    if (!data.images || data.images.length === 0) {
-      gallery.innerHTML = "<p>🚫 لا توجد صور لعرضها.</p>";
+    const data = await res.json();
+    const imgs = data.images || [];
+
+    if (imgs.length === 0) {
+      gallery.innerHTML = "<p style='color:white;text-align:center;'>No images found in JSON.</p>";
       return;
     }
 
-    gallery.innerHTML = "";
-
-    data.images.forEach((imgURL) => {
-      const fixedURL = fixDropboxLink(imgURL);
+    imgs.forEach((link) => {
       const img = document.createElement("img");
-      img.src = fixedURL;
-      img.alt = "image";
-      img.style.width = "200px";
+      img.src = link;
+      img.alt = "movie";
+      img.style.width = "220px";
+      img.style.height = "auto";
       img.style.margin = "10px";
-      img.loading = "lazy";
+      img.style.borderRadius = "12px";
+      img.style.boxShadow = "0 0 10px rgba(0,0,0,0.4)";
       gallery.appendChild(img);
     });
-
   } catch (err) {
-    console.error("💥 خطأ أثناء تحميل الصور:", err);
-    gallery.innerHTML = "<p>❌ حدث خطأ أثناء تحميل الصور.</p>";
+    console.error(err);
+    gallery.innerHTML = `<p style='color:red;text-align:center;'>Error loading images: ${err.message}</p>`;
   }
 });
 
