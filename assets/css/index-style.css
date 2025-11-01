@@ -678,7 +678,7 @@ body.dark-theme .theme-tog-track .theme-indic {
 }
 
 /* ===================== الكارد ===================== */
-.media-card {
+.media-thumb {
     flex: 0 0 210px;
     scroll-snap-align: start;
     border-radius: 14px;
