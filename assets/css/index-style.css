@@ -718,7 +718,7 @@ body.dark-theme .theme-tog-track .theme-indic {
 }
 
 .media-thumb:hover::after {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1.05);
 }
 /* ===================== الـ Popup ===================== */
 .popup-overlay {
