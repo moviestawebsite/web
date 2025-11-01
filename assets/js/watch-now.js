@@ -781,7 +781,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("..data/json/movies-database.json");
+    const response = await fetch("../data/json/movies-database.json");
     if (!response.ok) throw new Error("ملف JSON مش متاح");
     const data = await response.json();
 
