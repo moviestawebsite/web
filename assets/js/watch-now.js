@@ -772,7 +772,7 @@ function initializeAllVideoPlayers() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function loadImages() {
   const gallery = document.querySelector(".media-gallery");
   if (!gallery) {
     console.error("❌ عنصر .media-gallery مش موجود في الصفحة");
@@ -781,32 +781,45 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const res = await fetch("../data/json/movies-database.json");
-    if (!res.ok) throw new Error("ملف JSON مش موجود أو المسار غلط");
+    if (!res.ok) throw new Error("❌ ملف JSON مش موجود أو المسار غلط");
 
     const data = await res.json();
     const imgs = data.images || [];
 
+    // لو مفيش صور
     if (imgs.length === 0) {
-      gallery.innerHTML = "<p style='color:white;text-align:center;'>No images found in JSON.</p>";
+      gallery.innerHTML = "<p style='color:white;text-align:center;'>📭 لا توجد صور في الملف.</p>";
       return;
     }
 
-    imgs.forEach((link) => {
+    // تنظيف أي صور قديمة
+    gallery.innerHTML = "";
+
+    // توليد الصور تلقائيًا
+    imgs.forEach((src) => {
       const img = document.createElement("img");
-      img.src = link;
-      img.alt = "movie";
-      img.style.width = "220px";
+      img.src = src;
+      img.alt = "Movie Poster";
+      img.loading = "lazy";
+      img.style.width = "200px";
       img.style.height = "auto";
       img.style.margin = "10px";
       img.style.borderRadius = "12px";
       img.style.boxShadow = "0 0 10px rgba(0,0,0,0.4)";
+      img.style.transition = "0.3s";
+      img.addEventListener("mouseenter", () => (img.style.transform = "scale(1.05)"));
+      img.addEventListener("mouseleave", () => (img.style.transform = "scale(1)"));
       gallery.appendChild(img);
     });
   } catch (err) {
     console.error(err);
-    gallery.innerHTML = `<p style='color:red;text-align:center;'>Error loading images: ${err.message}</p>`;
+    const gallery = document.querySelector(".media-gallery");
+    if (gallery)
+      gallery.innerHTML = `<p style='color:red;text-align:center;'>⚠️ Error: ${err.message}</p>`;
   }
-});
+}
+
+document.addEventListener("DOMContentLoaded", loadImages);
 
 function fixDropboxLinks() {
   document.querySelectorAll("img, video, source").forEach((el) => {
