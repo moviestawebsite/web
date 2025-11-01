@@ -162,30 +162,45 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-async function loadImagesOnly() {
+document.addEventListener("DOMContentLoaded", async () => {
+  const gallery = document.querySelector(".media-gallery");
+
+  if (!gallery) {
+    console.error("❌ عنصر .media-gallery مش موجود في الصفحة");
+    return;
+  }
+
   try {
-    const response = await fetch("../data/json/movies-database.json");
+    const response = await fetch("data/json/movies-database.json");
+    if (!response.ok) throw new Error("ملف JSON مش متاح");
     const data = await response.json();
 
-    const gallery = document.querySelector(".media-gallery");
+    if (!data.images || data.images.length === 0) {
+      gallery.innerHTML = "<p>🚫 لا توجد صور لعرضها.</p>";
+      return;
+    }
+
     gallery.innerHTML = "";
 
-    const images = data.images || [];
-
-    images.forEach((imgObj) => {
-      const imgURL = fixDropboxLink(imgObj.url || imgObj);
+    data.images.forEach((imgURL) => {
+      const fixedURL = fixDropboxLink(imgURL);
       const img = document.createElement("img");
-      img.src = imgURL;
+      img.src = fixedURL;
       img.alt = "image";
+      img.loading = "lazy";
+      img.style.width = "200px";
+      img.style.margin = "10px";
+      img.onerror = () => {
+        console.warn("⚠️ فشل تحميل الصورة:", fixedURL);
+      };
       gallery.appendChild(img);
     });
 
   } catch (err) {
-    console.error("Error loading images:", err);
-    const gallery = document.querySelector(".media-gallery");
-    gallery.innerHTML = "<p>Failed to load images.</p>";
+    console.error("💥 خطأ أثناء تحميل الصور:", err);
+    gallery.innerHTML = "<p>❌ حدث خطأ أثناء تحميل الصور.</p>";
   }
-}
+});
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
