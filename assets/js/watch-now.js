@@ -162,18 +162,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function renderMediaCard(item) {
-  return `
-    <div class="media-card" data-id="${item.id}">
-      <div class="img-box">
-        <img src="${item.image}" alt="${item.title}" class="media-thumb" />
-      </div>
-      <div class="media-info">
-        <h3 class="media-title">${item.title}</h3>
-        <p><i class='fa-solid fa-film'></i> ${item.what}</p>
-      </div>
-    </div>
-  `;
+async function loadImagesOnly() {
+  try {
+    const response = await fetch("data/json/movies-database.json");
+    const data = await response.json();
+
+    // 🖼️ العنصر اللى هيظهر فيه الصور
+    const gallery = document.querySelector(".media-gallery");
+    gallery.innerHTML = "";
+
+    // ✅ لو عندك جزء خاص بالصور في الـ JSON
+    const images = data.images || [];
+
+    images.forEach((imgObj) => {
+      const imgURL = fixDropboxLink(imgObj.url || imgObj); // يدعم سواء كائن أو نص
+      const img = document.createElement("img");
+      img.src = imgURL;
+      img.alt = "image";
+      gallery.appendChild(img);
+    });
+
+  } catch (err) {
+    console.error("Error loading images:", err);
+  }
 }
 
 // ======================= كود الـ Popup =======================
