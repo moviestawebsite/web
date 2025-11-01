@@ -111,7 +111,7 @@ searchInput.addEventListener("input", async (e) => {
       <div class="area search-area">
         <h2><span class="title-text"><i class="fa-solid fa-search"></i> Results</span></h2>
         <div class="movie-row-search" id="movieRow-search">
-          ${results.map(renderMovieCard).join("")}
+          ${results.map(loadImages).join("")}
         </div>
       </div>
     `;
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.innerHTML = `
       <div class="media-grid">
-        ${data.media.map(load).join("")}
+        ${data.media.map(renderMediaCard).join("")}
       </div>
     `;
 
