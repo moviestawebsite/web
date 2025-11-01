@@ -727,7 +727,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     transform: translate(-50%, -50%) scale(1);
 }
 
-..media-gallery {
+.gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 20px;
