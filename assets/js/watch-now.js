@@ -165,13 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 function renderMediaCard(item) {
   return `
     <div class="media-card" data-id="${item.id}">
-      <div class="img-box">
-        <img src="${item.image}" alt="${item.title}" class="media-thumb" />
-      </div>
-      <div class="media-info">
-        <h3 class="media-title">${item.title}</h3>
-        <p><i class='fa-solid fa-film'></i> ${item.what}</p>
-      </div>
+      <img src="${item.image}" alt="${item.title}" class="media-thumb" />
     </div>
   `;
 }
