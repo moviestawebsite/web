@@ -684,8 +684,8 @@ body.dark-theme .theme-tog-track .theme-indic {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 4px 10px var(--color-shadow);
-    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
     cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
 }
 
 .media-thumb:hover {
