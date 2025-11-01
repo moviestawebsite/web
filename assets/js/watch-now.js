@@ -48,7 +48,7 @@ search.addEventListener("click", () => {
 if (window.innerWidth > 768) sidebar.classList.add("closed");
 
 // ======================= كود تحميل النتائج =======================
-function loadImages(movie) {
+function renderMovieCard(movie) {
   const ext = movie.poster.split(".").pop().toLowerCase();
   const mediaHTML =
     ext === "mp4" || ext === "webm"
@@ -111,7 +111,7 @@ searchInput.addEventListener("input", async (e) => {
       <div class="area search-area">
         <h2><span class="title-text"><i class="fa-solid fa-search"></i> Results</span></h2>
         <div class="movie-row-search" id="movieRow-search">
-          ${results.map(loadImages).join("")}
+          ${results.map(renderMovieCard).join("")}
         </div>
       </div>
     `;
