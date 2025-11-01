@@ -1,18 +1,5 @@
 {
-  "slider": [
-    {
-      "img": "https://www.dropbox.com/scl/fi/b3jq33s0zshdr2jptoggl/anyone-but-u-slider.jpg?rlkey=8co4p6tevsc8cypn8yh582ab4&st=r5e2hgbc&dl=0",
-      "link": "Pages/gta-v.html"
-    },
-    {
-      "img": "https://www.dropbox.com/scl/fi/fake-link-2.jpg?dl=0",
-      "link": "Pages/gta-iv.html"
-    },
-    {
-      "img": "https://i.postimg.cc/RhN0Cf6f/the-idea-of-u-slide.jpg",
-      "link": "Pages/ac-2.html"
-    }
-  ],
+  ,
   "sections": [
     {
       "title": "Action",
