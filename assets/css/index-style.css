@@ -681,7 +681,6 @@ body.dark-theme .theme-tog-track .theme-indic {
 .media-card {
     flex: 0 0 210px;
     scroll-snap-align: start;
-    background: var(--color-bg-cards);
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 4px 10px var(--color-shadow);
