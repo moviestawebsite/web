@@ -149,10 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     const liveFrame = document.querySelector(".live-frame iframe");
-
-    // بعد 5 ثواني هنفحص هل البث اشتغل ولا لأ
     setTimeout(() => {
-      // لو لسه الـ iframe مش ظاهر كويس أو فشل التحميل
       if (!liveFrame.contentWindow || liveFrame.contentDocument?.body?.innerHTML.includes("unavailable")) {
         document.querySelector(".live-frame").innerHTML = `
       <div class="no-live">
