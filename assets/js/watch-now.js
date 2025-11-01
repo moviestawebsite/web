@@ -48,7 +48,7 @@ search.addEventListener("click", () => {
 if (window.innerWidth > 768) sidebar.classList.add("closed");
 
 // ======================= كود تحميل النتائج =======================
-function renderMovieCard(movie) {
+function loadImages(movie) {
   const ext = movie.poster.split(".").pop().toLowerCase();
   const mediaHTML =
     ext === "mp4" || ext === "webm"
