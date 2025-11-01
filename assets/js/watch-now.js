@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="media-grid">
         ${data.media.map(renderMediaCard).join("")}
       </div>
-`;
+    `;
 
 
 
