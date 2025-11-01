@@ -74,7 +74,7 @@ async function loadMovies() {
         <div class="list">
           <div class="item"><a href="Pages/gta-v.html"><img src="https://i.postimg.cc/76fST5jY/The-Nun-slider.jpg"></a></div>
           <div class="item"><a href="Pages/gta-iv.html"><img src="https://i.postimg.cc/cHHBM9gP/sijjin-8-slider.jpg"></a></div>
-          <div class="item"><a href="Pages/gta-sa-tde.html"><img src="https://www.dl.dropbox.com/scl/fi/b3jq33s0zshdr2jptoggl/anyone-but-u-slider.jpg?rlkey=8co4p6tevsc8cypn8yh582ab4&st=r5e2hgbc&dl=0"></a></div>
+          <div class="item"><a href="Pages/gta-sa-tde.html"><img src="https://www.dropbox.com/scl/fi/b3jq33s0zshdr2jptoggl/anyone-but-u-slider.jpg?rlkey=8co4p6tevsc8cypn8yh582ab4&st=r5e2hgbc&dl=0"></a></div>
           <div class="item"><a href="Pages/ac-2.html"><img src="https://i.postimg.cc/RhN0Cf6f/the-idea-of-u-slide.jpg"></a></div>
           <div class="item"><a href="Pages/ac-mirage.html"><img src="https://i.postimg.cc/J09shB62/the-amazing-spiderman-slide.jpg"></a></div>
         </div>
