@@ -140,12 +140,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.mediaData = data.media;
 
     container.innerHTML = `
-      <iframe width="1200" height="400" src="https://www.youtube.com/embed/live_stream?channel=UCHxZfWDxxumOyTN0nvbRM5A"
-        frameborder="0" allowfullscreen></iframe>
-      <div class="media-grid">
-        ${data.media.map(renderMediaCard).join("")}
+      <div class="live-frame">
+      <iframe src="https://www.youtube.com/embed/live_stream?channel=UCHxZfWDxxumOyTN0nvbRM5A"
+        allowfullscreen></iframe>
       </div>
+  <div class="media-grid">
+    ${data.media.map(renderMediaCard).join("")}
+  </div>
 `;
+
 
 
     fixDropboxLinks();
