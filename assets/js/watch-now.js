@@ -204,6 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
   }
+  
 });
 
 function renderMediaCard(item) {
