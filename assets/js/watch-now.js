@@ -205,34 +205,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
   }
-  // async function checkLiveStatus() {
-  //   const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-  //   const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
+  async function checkLiveStatus() {
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
+    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
 
-  //   try {
-  //     const res = await fetch(
-  //       `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-  //     );
-  //     const data = await res.json();
+    try {
+      const res = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
+      );
+      const data = await res.json();
 
-  //     // لو في بث مباشر → نخلي الشارة باينة
-  //     if (data.items && data.items.length > 0) {
-  //       liveBadge.style.display = "inline-block";
-  //     } else {
-  //       // لو مفيش → نخفيها
-  //       liveBadge.style.display = "none";
-  //     }
-  //   } catch (err) {
-  //     console.error("Live badge error:", err);
-  //     liveBadge.style.display = "none";
-  //   }
-  // }
+      // لو في بث مباشر → نخلي الشارة باينة
+      if (data.items && data.items.length > 0) {
+        liveBadge.style.display = "inline-block";
+      } else {
+        // لو مفيش → نخفيها
+        liveBadge.style.display = "none";
+      }
+    } catch (err) {
+      console.error("Live badge error:", err);
+      liveBadge.style.display = "none";
+    }
+  }
 
-  // // شغّل الفحص عند فتح الصفحة
-  // checkLiveStatus();
+  // شغّل الفحص عند فتح الصفحة
+  checkLiveStatus();
 
-  // // ممكن كمان تفحص كل 5 دقايق تلقائيًا
-  // setInterval(checkLiveStatus, 300000);
+  // ممكن كمان تفحص كل 5 دقايق تلقائيًا
+  setInterval(checkLiveStatus, 300000);
 });
 
 function renderMediaCard(item) {
