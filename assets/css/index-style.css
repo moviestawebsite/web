@@ -1433,13 +1433,10 @@ section {
     border-radius: 20px;
 }
 
-/* شارة LIVE */
-/* تأكد إن العنصر الأب فيه position: relative */
 #watchNowItem {
     position: relative;
 }
 
-/* شكل الشارة لما السايدبار مفتوحة */
 .live-badge {
     background: red;
     color: white;
