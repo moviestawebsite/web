@@ -132,7 +132,6 @@ clearBtn.addEventListener("click", () => {
 // ======================= كود تحميل الفيديوهات =======================
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
-  const liveBadge = document.getElementById("liveBadge");
 
   try {
     const response = await fetch("../data/json/videos-database.json");
@@ -205,6 +204,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
   }
+  const liveBadge = document.getElementById("liveBadge");
+
   async function checkLiveStatus() {
     const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
     const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
