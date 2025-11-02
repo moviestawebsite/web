@@ -132,7 +132,7 @@ clearBtn.addEventListener("click", () => {
 // ======================= كود تحميل الفيديوهات =======================
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
-  const liveBadge = document.getElementById("liveBadge"); // ✅ خليه فوق علشان يكون جاهز
+  const liveBadge = document.getElementById("liveBadge");
 
   const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
   const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
