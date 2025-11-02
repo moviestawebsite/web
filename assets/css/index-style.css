@@ -1469,7 +1469,6 @@ section {
     background: red;
     color: transparent;
     animation: blink 1s infinite;
-    margin: 0 0;
 }
 
 @media (max-width: 430px) {
