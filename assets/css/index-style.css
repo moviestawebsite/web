@@ -1447,7 +1447,7 @@ section {
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 4px;
-    margin-left: 8px;
+    margin-left: auto;
     display: inline-block;
     animation: blink 1.2s infinite;
     transition: all 0.3s ease;
