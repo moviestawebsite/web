@@ -1457,7 +1457,6 @@ section {
     50% { opacity: 0.5; }
 }
 
-/* لما السايدبار تتقفل */
 .sidebar.closed #watchNowItem {
     position: relative;
 }
