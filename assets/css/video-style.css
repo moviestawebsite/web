@@ -24,7 +24,8 @@
     border-radius: 16px;
     font-size: 1.2rem;
     display: flexbox;
-    
+    align-items: center;
+    justify-content: center;
 }
 
 .no-live i {
