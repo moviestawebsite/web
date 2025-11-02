@@ -1436,23 +1436,31 @@ section {
 /* شارة LIVE */
 /* ====== شارة البث المباشر (LIVE badge) ====== */
 /* ====== شارة البث المباشر (LIVE badge) ====== */
-.menu-item#watchNowItem {
+/* ====== شارة البث المباشر (LIVE badge) ====== */
+#watchNowItem {
     position: relative;
+}
+
+#watchNowItem .menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .live-badge {
     position: absolute;
-    top: 8px;
-    right: 14px;
+    top: 50%;
+    left: 40px;
+    /* المسافة من الأيقونة نفسها */
+    transform: translateY(-50%);
     background: red;
     color: white;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 4px;
-    display: inline-block;
     animation: blink 1.2s infinite;
-    letter-spacing: 0.5px;
     text-transform: uppercase;
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
 }
@@ -1470,16 +1478,17 @@ section {
     }
 }
 
-/* لما الـ sidebar تكون مقفولة */
-.sidebar.closed .live-badge {
-    top: 4px;
-    right: 8px;
+/* لما السايدبار تتقفل */
+.sidebar.closed #watchNowItem .live-badge {
+    top: 50%;
+    left: 30px;
+    /* أقرب للأيقونة لما تتقفل */
     width: 8px;
     height: 8px;
     border-radius: 50%;
     padding: 0;
-    background: red;
     color: transparent;
+    background: red;
     animation: blink 1s infinite;
     box-shadow: 0 0 6px red;
 }
