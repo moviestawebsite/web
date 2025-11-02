@@ -17,7 +17,7 @@
 
 .no-live {
     text-align: center;
-    padding: 940px;
+    width: 940px;
     color: var(--color-text-primary);
     background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
