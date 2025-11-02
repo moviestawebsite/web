@@ -131,46 +131,37 @@ clearBtn.addEventListener("click", () => {
 
 // ======================= كود تحميل الفيديوهات =======================
 document.addEventListener("DOMContentLoaded", async () => {
-  const container = document.getElementById("mainContainer");
+  const channelId = "UCHxZfWDxxumOyTN0nvbRM5A"; // حط هنا ID القناة بتاعتك
+  const liveContainer = document.getElementById("liveContainer");
+  const liveBadge = document.getElementById("liveBadge"); // الشارة الحمراء
 
-  try {
-    const response = await fetch("../data/json/videos-database.json");
-    const data = await response.json();
+  async function loadLiveStream() {
+    try {
+      const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
+      const xmlText = await res.text();
 
-    window.mediaData = data.media;
+      const isLive = xmlText.includes("<yt:liveBroadcastContent>live</yt:liveBroadcastContent>");
 
-    // هنا بننشئ العنصر الأساسي للصفحة
-    container.innerHTML = `
-      <div id="liveContainer" class="live-frame"></div>
-      <div class="media-grid">
-        ${data.media.map(renderMediaCard).join("")}
-      </div>
-    `;
+      if (isLive) {
+        // ✅ فيه بث مباشر
+        const videoIdMatch = xmlText.match(/<yt:videoId>(.*?)<\/yt:videoId>/);
+        const liveVideoId = videoIdMatch ? videoIdMatch[1] : null;
 
-    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
-    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
-
-    const liveContainer = document.getElementById("liveContainer");
-
-    async function loadLiveStream() {
-      try {
-        const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-        );
-        const liveData = await res.json();
-
-        if (liveData.items && liveData.items.length > 0) {
-          const liveVideoId = liveData.items[0].id.videoId;
+        if (liveVideoId) {
           liveContainer.innerHTML = `
-            <div class="live-frame">
-            <iframe 
-              src="https://www.youtube.com/embed/${liveVideoId}" 
-              allowfullscreen 
-            ></iframe></div>
-          `;
-        } else {
-          liveContainer.innerHTML = `
+              <div class="live-frame">
+                <iframe 
+                  src="https://www.youtube.com/embed/${liveVideoId}" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            `;
+        }
+
+        if (liveBadge) liveBadge.style.display = "inline-block";
+      } else {
+        // 🚫 مفيش بث مباشر
+        liveContainer.innerHTML = `
             <div class="no-live">
               <div class="txt-nt-live">
                 <i class="fa-solid fa-video-slash"></i>
@@ -178,32 +169,19 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           `;
-        }
-      } catch (err) {
-        console.error("Live Error:", err);
-        liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
+        if (liveBadge) liveBadge.style.display = "none";
       }
+    } catch (err) {
+      console.error("Live Error:", err);
+      liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
+      if (liveBadge) liveBadge.style.display = "none";
     }
-
-    await loadLiveStream();
-
-    // 🔹 باقي كودك العادي
-    fixDropboxLinks();
-
-    container.addEventListener("click", (e) => {
-      const card = e.target.closest(".media-card");
-      if (!card) return;
-
-      const id = card.dataset.id;
-      const item = window.mediaData.find((m) => m.id === id);
-
-      if (item) openPopup(item);
-    });
-
-  } catch (error) {
-    console.error("Error loading media:", error);
-    container.innerHTML = `<p>There is an error loading items</p>`;
   }
+
+  await loadLiveStream();
+
+  // 🔁 تحديث حالة البث كل 3 دقائق
+  setInterval(loadLiveStream, 180000);
 });
 
 function renderMediaCard(item) {
