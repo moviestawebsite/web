@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
           liveContainer.innerHTML = `
             <div class="no-live">
-              <div class="texts">
+              <div class="txt-nt-live">
               <i class="fa-solid fa-video-slash"></i>
               <p>There is no live right now</p>
               </div>
