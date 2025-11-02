@@ -163,12 +163,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (liveData.items && liveData.items.length > 0) {
           const liveVideoId = liveData.items[0].id.videoId;
           liveContainer.innerHTML = `
-            <>
+            <div class="">
             <iframe 
               src="https://www.youtube.com/embed/${liveVideoId}" 
               allowfullscreen 
               style="width:940px; height:100%; border-radius:16px;"
-            ></iframe></>
+            ></iframe></div>
           `;
         } else {
           liveContainer.innerHTML = `
