@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     window.mediaData = data.media;
 
-    // هنا بننشئ العنصر الأساسي للصفحة
+    // إنشاء المحتوى الأساسي للصفحة
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
@@ -147,47 +147,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
-    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
+    // 🔴 تحكم يدوي هنا (true = يوجد بث مباشر | false = لا يوجد بث)
+    const isLive = false; // ← غيّرها يدويًا وقت ما يكون في بث
 
     const liveContainer = document.getElementById("liveContainer");
 
-    async function loadLiveStream() {
-      try {
-        const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-        );
-        const liveData = await res.json();
-
-        if (liveData.items && liveData.items.length > 0) {
-          const liveVideoId = liveData.items[0].id.videoId;
-          liveContainer.innerHTML = `
-            <div class="live-frame">
-            <iframe 
-              src="https://www.youtube.com/embed/${liveVideoId}" 
-              allowfullscreen 
-            ></iframe></div>
-          `;
-        } else {
-          liveContainer.innerHTML = `
-            <div class="no-live">
-              <div class="txt-nt-live">
-                <i class="fa-solid fa-video-slash"></i>
-                <p>There is no live right now</p>
-              </div>
-            </div>
-          `;
-        }
-      } catch (err) {
-        console.error("Live Error:", err);
-        liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
-      }
+    if (isLive) {
+      // في بث مباشر
+      const liveVideoId = "YOUR_VIDEO_ID"; // ← ضع هنا ID الفيديو لو عايز
+      liveContainer.innerHTML = `
+        <div class="live-frame">
+          <iframe 
+            src="https://www.youtube.com/embed/${liveVideoId}" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      `;
+    } else {
+      // لا يوجد بث مباشر
+      liveContainer.innerHTML = `
+        <div class="no-live">
+          <div class="txt-nt-live">
+            <i class="fa-solid fa-video-slash"></i>
+            <p>There is no live right now</p>
+          </div>
+        </div>
+      `;
     }
 
-    await loadLiveStream();
-
-    // 🔹 باقي كودك العادي
+    // باقي الكود العادي
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
@@ -209,10 +197,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 function renderMediaCard(item) {
   return `
     <div class="media-card" data-id="${item.id}">
-        <img src="${item.image}" alt="${item.title}" class="media-thumb" />
+      <img src="${item.image}" alt="${item.title}" class="media-thumb" />
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
