@@ -147,29 +147,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
-    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
-
     const liveContainer = document.getElementById("liveContainer");
 
+    // 🟢 استدعاء API السيرفر البايثون بدل YouTube API مباشرة
     async function loadLiveStream() {
       try {
-        const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-        );
+        // غيّر الرابط ده حسب مكان تشغيل السيرفر
+        const res = await fetch("http://localhost:5000/api/live");
         const liveData = await res.json();
 
-        if (liveData.items && liveData.items.length > 0) {
-          const liveVideoId = liveData.items[0].id.videoId;
+        if (liveData.live) {
+          // لو فى بث مباشر
           liveContainer.innerHTML = `
             <div class="live-frame">
-            <iframe 
-              src="https://www.youtube.com/embed/${liveVideoId}" 
-              allowfullscreen 
-            ></iframe></div>
+              <iframe 
+                src="https://www.youtube.com/embed/${liveData.videoId}" 
+                allowfullscreen
+              ></iframe>
+            </div>
           `;
         } else {
+          // مفيش بث مباشر
           liveContainer.innerHTML = `
             <div class="no-live">
               <div class="txt-nt-live">
@@ -187,7 +185,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await loadLiveStream();
 
-    // 🔹 باقي كودك العادي
+    // 🔁 تحديث كل 5 دقايق (اختياري)
+    setInterval(loadLiveStream, 300000);
+
+    // باقي الكود
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
@@ -213,6 +214,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
