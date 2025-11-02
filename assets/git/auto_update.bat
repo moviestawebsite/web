@@ -4,5 +4,5 @@ cd /d "D:\Documents\My Programming Projects\Html\Movie"
 git add .
 git commit -m "Auto update: %date% %time%" 2>nul
 git push origin main 2>nul
-timeout /t 10 >nul
+timeout /t 5 >nul
 goto loop
