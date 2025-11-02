@@ -159,28 +159,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
         const liveData = await res.json();
 
+        console.log("🔍 Live data:", liveData); // ✅ تتبع النتيجة في الكونسول
+
         if (liveData.items && liveData.items.length > 0) {
           const liveVideoId = liveData.items[0].id.videoId;
+          console.log("🎥 Live video found:", liveVideoId); // ✅ تأكيد وجود بث
+
           liveContainer.innerHTML = `
-            <div class="live-frame">
-              <iframe 
-                src="https://www.youtube.com/embed/${liveVideoId}" 
-                allowfullscreen
-              ></iframe>
-            </div>
-          `;
-          // ✅ لو في بث مباشر → أظهر النقطة
+        <div class="live-frame">
+          <iframe 
+            src="https://www.youtube.com/embed/${liveVideoId}" 
+            allowfullscreen
+          ></iframe>
+        </div>
+      `;
           if (liveBadge) liveBadge.style.display = "inline-block";
         } else {
+          console.log("❌ No live videos found");
           liveContainer.innerHTML = `
-            <div class="no-live">
-              <div class="txt-nt-live">
-                <i class="fa-solid fa-video-slash"></i>
-                <p>There is no live right now</p>
-              </div>
-            </div>
-          `;
-          // ✅ مفيش بث → اخفيها
+        <div class="no-live">
+          <div class="txt-nt-live">
+            <i class="fa-solid fa-video-slash"></i>
+            <p>There is no live right now</p>
+          </div>
+        </div>
+      `;
           if (liveBadge) liveBadge.style.display = "none";
         }
       } catch (err) {
@@ -189,6 +192,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (liveBadge) liveBadge.style.display = "none";
       }
     }
+
 
     await loadLiveStream();
 
