@@ -18,6 +18,7 @@
 .no-live {
     text-align: center;
     width: 940px;
+    height: 100%;
     color: var(--color-text-primary);
     background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
@@ -29,4 +30,5 @@
     display: block;
     margin-bottom: 10px;
     color: var(--color-accent, #e74c3c);
+    text-align: center;
 }
