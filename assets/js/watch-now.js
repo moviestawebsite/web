@@ -139,7 +139,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     window.mediaData = data.media;
 
-    // هنا بننشئ العنصر الأساسي للصفحة
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
@@ -150,7 +149,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
     const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
     const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
-
     const liveContainer = document.getElementById("liveContainer");
 
     async function loadLiveStream() {
@@ -160,15 +158,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
         const liveData = await res.json();
 
+        const liveMenu = document.querySelector(".live-menu");
+
         if (liveData.items && liveData.items.length > 0) {
           const liveVideoId = liveData.items[0].id.videoId;
           liveContainer.innerHTML = `
             <div class="live-frame">
-            <iframe 
-              src="https://www.youtube.com/embed/${liveVideoId}" 
-              allowfullscreen 
-            ></iframe></div>
+              <iframe 
+                src="https://www.youtube.com/embed/${liveVideoId}" 
+                allowfullscreen 
+              ></iframe>
+            </div>
           `;
+          liveMenu.querySelector(".live-badge").style.display = "inline-block";
         } else {
           liveContainer.innerHTML = `
             <div class="no-live">
@@ -178,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           `;
+          liveMenu.querySelector(".live-badge").style.display = "none";
         }
       } catch (err) {
         console.error("Live Error:", err);
@@ -187,7 +190,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await loadLiveStream();
 
-    // 🔹 باقي كودك العادي
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
