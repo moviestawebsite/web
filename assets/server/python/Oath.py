@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-API_KEY = "ضع هنا مفتاح YouTube API"
+API_KEY = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs"
 CHANNEL_ID = "UCHxZfWDxxumOyTN0nvbRM5A"
 
 @app.route("/api/live")
