@@ -1435,15 +1435,13 @@ section {
 
 /* شارة LIVE */
 /* ====== شارة البث المباشر (LIVE badge) ====== */
-/* ====== شارة البث المباشر (LIVE badge) ====== */
-.menu-item#watchNowItem {
+.menu-item.live-menu {
     position: relative;
 }
 
 .live-badge {
     position: absolute;
     top: 8px;
-
     right: 14px;
     background: red;
     color: white;
@@ -1458,7 +1456,7 @@ section {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
 }
 
-/* حركة الوميض */
+/* حركة وميض */
 @keyframes blink {
 
     0%,
@@ -1484,6 +1482,7 @@ section {
     animation: blink 1s infinite;
     box-shadow: 0 0 6px red;
 }
+
 
 @media (max-width: 430px) {
     .container-control {
