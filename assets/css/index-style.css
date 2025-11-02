@@ -1465,7 +1465,6 @@ section {
     height: 8px;
     border-radius: 50%;
     padding: 0;
-    margin-left: 2px;
     background: red;
     color: transparent;
     animation: blink 1s infinite;
