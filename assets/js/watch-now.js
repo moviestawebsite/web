@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       liveContainer.innerHTML = `
         <div class="live-frame">
           <iframe 
-            src="https://www.youtube.com/embed/${liveVideoId}" 
+            src="https://www.youtube.com/watch?v=${liveVideoId}" 
             allowfullscreen>
           </iframe>
         </div>
