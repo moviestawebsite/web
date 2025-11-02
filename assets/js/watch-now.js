@@ -234,7 +234,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // ممكن كمان تفحص كل 5 دقايق تلقائيًا
   setInterval(checkLiveStatus, 300000);
-
 });
 
 function renderMediaCard(item) {
