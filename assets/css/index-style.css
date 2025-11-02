@@ -1435,47 +1435,54 @@ section {
 
 /* شارة LIVE */
 /* ====== شارة البث المباشر (LIVE badge) ====== */
-/* ====== شارة البث المباشر (LIVE badge) ====== */
-.menu-item#watchNowItem {
-  position: relative;
+.menu-item.live-menu {
+    position: relative;
 }
 
 .live-badge {
-  position: absolute;
-  top: 8px; /* المسافة من فوق */
-  right: 14px; /* المسافة من اليمين */
-  background: red;
-  color: white;
-  font-size: 0.65rem;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 4px;
-  display: inline-block;
-  animation: blink 1.2s infinite;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    background: red;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    animation: blink 1.2s infinite;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
 }
 
-/* حركة الوميض */
+/* حركة وميض */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
 }
 
 /* لما الـ sidebar تكون مقفولة */
 .sidebar.closed .live-badge {
-  top: 4px;
-  right: 8px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  padding: 0;
-  background: red;
-  color: transparent;
-  animation: blink 1s infinite;
-  box-shadow: 0 0 6px red;
+    top: 4px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    padding: 0;
+    background: red;
+    color: transparent;
+    animation: blink 1s infinite;
+    box-shadow: 0 0 6px red;
 }
+
 
 @media (max-width: 430px) {
     .container-control {
