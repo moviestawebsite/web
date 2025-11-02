@@ -132,7 +132,6 @@ clearBtn.addEventListener("click", () => {
 // ======================= كود تحميل الفيديوهات =======================
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
-  const liveBadge = document.getElementById("liveBadge");
 
   try {
     const response = await fetch("../data/json/videos-database.json");
@@ -140,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     window.mediaData = data.media;
 
-    // بناء الصفحة
+    // هنا بننشئ العنصر الأساسي للصفحة
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
@@ -148,41 +147,47 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-    // ✅ دالة فحص البث المباشر
-    async function checkLive() {
-      const liveUrl =
-        "https://www.youtube.com/oembed?url=https://www.youtube.com/channel/UCHxZfWDxxumOyTN0nvbRM5A/live&format=json";
+    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
+    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
 
+    const liveContainer = document.getElementById("liveContainer");
+
+    async function loadLiveStream() {
       try {
-        const res = await fetch(liveUrl);
-        if (res.ok) {
-          const data = await res.json();
-          console.log("🎥 Live is ON:", data.title);
-          document.getElementById("liveContainer").innerHTML = `
-            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCHxZfWDxxumOyTN0nvbRM5A" allowfullscreen></iframe>
+        const res = await fetch(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
+        );
+        const liveData = await res.json();
+
+        if (liveData.items && liveData.items.length > 0) {
+          const liveVideoId = liveData.items[0].id.videoId;
+          liveContainer.innerHTML = `
+            <div class="live-frame">
+            <iframe 
+              src="https://www.youtube.com/embed/${liveVideoId}" 
+              allowfullscreen 
+            ></iframe></div>
           `;
-          if (liveBadge) liveBadge.style.display = "inline-block";
         } else {
-          document.getElementById("liveContainer").innerHTML = `
+          liveContainer.innerHTML = `
             <div class="no-live">
-              <i class="fa-solid fa-video-slash"></i>
-              <p>There is no live right now</p>
+              <div class="txt-nt-live">
+                <i class="fa-solid fa-video-slash"></i>
+                <p>There is no live right now</p>
+              </div>
             </div>
           `;
-          if (liveBadge) liveBadge.style.display = "none";
         }
-      } catch (e) {
-        console.error("Error checking live:", e);
-        if (liveBadge) liveBadge.style.display = "none";
+      } catch (err) {
+        console.error("Live Error:", err);
+        liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
       }
     }
 
-    // أول مرة
-    checkLive();
-    // إعادة الفحص كل 5 دقايق
-    setInterval(checkLive, 300000);
+    await loadLiveStream();
 
-    // باقي كودك
+    // 🔹 باقي كودك العادي
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
@@ -191,18 +196,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const id = card.dataset.id;
       const item = window.mediaData.find((m) => m.id === id);
+
       if (item) openPopup(item);
     });
+
   } catch (error) {
     console.error("Error loading media:", error);
-    container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
+    container.innerHTML = `<p>There is an error loading items</p>`;
   }
 });
 
 function renderMediaCard(item) {
   return `
     <div class="media-card" data-id="${item.id}">
-      <img src="${item.image}" alt="${item.title}" class="media-thumb" />
+        <img src="${item.image}" alt="${item.title}" class="media-thumb" />
     </div>
   `;
 }
