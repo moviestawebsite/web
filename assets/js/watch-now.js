@@ -154,11 +154,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (isLive) {
       // في بث مباشر
-      const liveVideoId = "k9fOUw6uYYU"; // ← ضع هنا ID الفيديو لو عايز
+      const liveVideoId = "YOUR_VIDEO_ID"; // ← ضع هنا ID الفيديو لو عايز
       liveContainer.innerHTML = `
         <div class="live-frame">
           <iframe 
-            src="https://www.youtube.com/watch?v=${liveVideoId}" 
+            src="https://www.youtube.com/embed/${liveVideoId}" 
             allowfullscreen>
           </iframe>
         </div>
@@ -201,6 +201,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
