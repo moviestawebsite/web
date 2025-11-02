@@ -1434,7 +1434,6 @@ section {
 }
 
 /* ====== شارة البث المباشر (LIVE badge) ====== */
-/* ====== شارة البث المباشر (LIVE badge) ====== */
 #watchNowItem {
     position: relative;
 }
@@ -1446,25 +1445,24 @@ section {
     gap: 10px;
 }
 
-/* شكل الشارة لما السايدبار مفتوحة */
 .live-badge {
     position: absolute;
     top: 50%;
-    left: 38px;
-    /* المسافة من أيقونة live_tv */
+    left: 40px;
+    /* المسافة من الأيقونة نفسها */
     transform: translateY(-50%);
     background: red;
     color: white;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 4px;
-    text-transform: uppercase;
     animation: blink 1.2s infinite;
-    box-shadow: 0 0 6px rgba(255, 0, 0, 0.7);
+    text-transform: uppercase;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
 }
 
-/* حركة وميض الشارة */
+/* حركة الوميض */
 @keyframes blink {
 
     0%,
@@ -1479,20 +1477,19 @@ section {
 
 /* لما السايدبار تتقفل */
 .sidebar.closed #watchNowItem .live-badge {
-    position: absolute;
-    top: 8px;
-    /* تظهر فوق الأيقونة */
-    left: 48%;
-    width: 9px;
-    height: 9px;
+    top: 50%;
+    left: 30px;
+    /* أقرب للأيقونة لما تتقفل */
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     padding: 0;
     color: transparent;
     background: red;
-    animation: blink 1.2s infinite;
-    box-shadow: 0 0 6px rgba(255, 0, 0, 0.8);
-    transform: none;
+    animation: blink 1s infinite;
+    box-shadow: 0 0 6px red;
 }
+
 
 @media (max-width: 430px) {
     .container-control {
