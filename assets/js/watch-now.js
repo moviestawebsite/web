@@ -134,21 +134,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
   const liveBadge = document.getElementById("liveBadge");
 
-  const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-  const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
-
   try {
     const response = await fetch("../data/json/videos-database.json");
     const data = await response.json();
 
     window.mediaData = data.media;
 
+    // هنا بننشئ العنصر الأساسي للصفحة
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
         ${data.media.map(renderMediaCard).join("")}
       </div>
     `;
+
+    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
+    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
 
     const liveContainer = document.getElementById("liveContainer");
 
@@ -159,43 +161,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
         const liveData = await res.json();
 
-        console.log("🔍 Live data:", liveData); // ✅ تتبع النتيجة في الكونسول
-
         if (liveData.items && liveData.items.length > 0) {
           const liveVideoId = liveData.items[0].id.videoId;
-          console.log("🎥 Live video found:", liveVideoId); // ✅ تأكيد وجود بث
-
           liveContainer.innerHTML = `
-        <div class="live-frame">
-          <iframe 
-            src="https://www.youtube.com/embed/${liveVideoId}" 
-            allowfullscreen
-          ></iframe>
-        </div>
-      `;
-          if (liveBadge) liveBadge.style.display = "inline-block";
+            <div class="live-frame">
+            <iframe 
+              src="https://www.youtube.com/embed/${liveVideoId}" 
+              allowfullscreen 
+            ></iframe></div>
+          `;
         } else {
-          console.log("❌ No live videos found");
           liveContainer.innerHTML = `
-        <div class="no-live">
-          <div class="txt-nt-live">
-            <i class="fa-solid fa-video-slash"></i>
-            <p>There is no live right now</p>
-          </div>
-        </div>
-      `;
-          if (liveBadge) liveBadge.style.display = "none";
+            <div class="no-live">
+              <div class="txt-nt-live">
+                <i class="fa-solid fa-video-slash"></i>
+                <p>There is no live right now</p>
+              </div>
+            </div>
+          `;
         }
       } catch (err) {
         console.error("Live Error:", err);
         liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
-        if (liveBadge) liveBadge.style.display = "none";
       }
     }
 
-
     await loadLiveStream();
 
+    // 🔹 باقي كودك العادي
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
@@ -211,25 +204,35 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
-    if (liveBadge) liveBadge.style.display = "none";
   }
+  async function checkLiveStatus() {
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
+    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
 
-  // ✅ فحص كل 5 دقايق لتحديث حالة البث
-  setInterval(async () => {
     try {
       const res = await fetch(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
       );
       const data = await res.json();
+
+      // لو في بث مباشر → نخلي الشارة باينة
       if (data.items && data.items.length > 0) {
         liveBadge.style.display = "inline-block";
       } else {
+        // لو مفيش → نخفيها
         liveBadge.style.display = "none";
       }
-    } catch {
+    } catch (err) {
+      console.error("Live badge error:", err);
       liveBadge.style.display = "none";
     }
-  }, 300000);
+  }
+
+  // شغّل الفحص عند فتح الصفحة
+  checkLiveStatus();
+
+  // ممكن كمان تفحص كل 5 دقايق تلقائيًا
+  setInterval(checkLiveStatus, 300000);
 });
 
 function renderMediaCard(item) {
