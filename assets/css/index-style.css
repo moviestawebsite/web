@@ -1435,14 +1435,17 @@ section {
 
 /* شارة LIVE */
 /* ====== شارة البث المباشر (LIVE badge) ====== */
-.menu-item.live-menu {
+/* ====== شارة البث المباشر (LIVE badge) ====== */
+.menu-item#watchNowItem {
     position: relative;
 }
 
 .live-badge {
     position: absolute;
     top: 8px;
+    /* المسافة من فوق */
     right: 14px;
+    /* المسافة من اليمين */
     background: red;
     color: white;
     font-size: 0.65rem;
@@ -1456,7 +1459,7 @@ section {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
 }
 
-/* حركة وميض */
+/* حركة الوميض */
 @keyframes blink {
 
     0%,
@@ -1482,7 +1485,6 @@ section {
     animation: blink 1s infinite;
     box-shadow: 0 0 6px red;
 }
-
 
 @media (max-width: 430px) {
     .container-control {
