@@ -1468,7 +1468,7 @@ section {
 .sidebar.closed #watchNowItem .live-badge {
     position: absolute;
     top: 4px;
-    left: 0;
+    left: 100;
     transform: translateX(-50%);
     width: 9px;
     height: 9px;
