@@ -130,50 +130,47 @@ clearBtn.addEventListener("click", () => {
 });
 
 // ======================= كود تحميل الفيديوهات =======================
-<script>
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
 
   try {
     const response = await fetch("../data/json/videos-database.json");
-  const data = await response.json();
+    const data = await response.json();
 
-  window.mediaData = data.media;
+    window.mediaData = data.media;
 
-  container.innerHTML = `
-  <div id="liveContainer" class="live-frame"></div>
-  <div class="media-grid">
-    ${data.media.map(renderMediaCard).join("")}
-  </div>
-  `;
+    // هنا بننشئ العنصر الأساسي للصفحة
+    container.innerHTML = `
+      <div id="liveContainer" class="live-frame"></div>
+      <div class="media-grid">
+        ${data.media.map(renderMediaCard).join("")}
+      </div>
+    `;
 
-  // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
-  const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-  const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
-  const liveContainer = document.getElementById("liveContainer");
+    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
+    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
 
-  async function loadLiveStream() {
+    const liveContainer = document.getElementById("liveContainer");
+
+    async function loadLiveStream() {
       try {
         const res = await fetch(
-  `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-  );
-  const liveData = await res.json();
-
-  const liveMenu = document.querySelector(".live-menu");
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
+        );
+        const liveData = await res.json();
 
         if (liveData.items && liveData.items.length > 0) {
           const liveVideoId = liveData.items[0].id.videoId;
-  liveContainer.innerHTML = `
-  <div class="live-frame">
-    <iframe
-      src="https://www.youtube.com/embed/${liveVideoId}"
-      allowfullscreen
-    ></iframe>
-  </div>
-  `;
-  liveMenu.querySelector(".live-badge").style.display = "inline-block";
+          liveContainer.innerHTML = `
+            <div class="live-frame">
+            <iframe 
+              src="https://www.youtube.com/embed/${liveVideoId}" 
+              allowfullscreen 
+            ></iframe></div>
+          `;
         } else {
-    liveContainer.innerHTML = `
+          liveContainer.innerHTML = `
             <div class="no-live">
               <div class="txt-nt-live">
                 <i class="fa-solid fa-video-slash"></i>
@@ -181,43 +178,41 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           `;
-  liveMenu.querySelector(".live-badge").style.display = "none";
         }
       } catch (err) {
-    console.error("Live Error:", err);
-  liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
+        console.error("Live Error:", err);
+        liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
       }
     }
 
-  await loadLiveStream();
+    await loadLiveStream();
 
-  fixDropboxLinks();
+    // 🔹 باقي كودك العادي
+    fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
       const card = e.target.closest(".media-card");
-  if (!card) return;
+      if (!card) return;
 
-  const id = card.dataset.id;
+      const id = card.dataset.id;
       const item = window.mediaData.find((m) => m.id === id);
 
-  if (item) openPopup(item);
+      if (item) openPopup(item);
     });
 
   } catch (error) {
     console.error("Error loading media:", error);
-  container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
+    container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
   }
 });
 
-  function renderMediaCard(item) {
+function renderMediaCard(item) {
   return `
-  <div class="media-card" data-id="${item.id}">
-    <img src="${item.image}" alt="${item.title}" class="media-thumb" />
-  </div>
+    <div class="media-card" data-id="${item.id}">
+        <img src="${item.image}" alt="${item.title}" class="media-thumb" />
+    </div>
   `;
 }
-</script>
-
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
