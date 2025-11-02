@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (isLive) {
       // في بث مباشر
-      const liveVideoId = "YOUR_VIDEO_ID"; // ← ضع هنا ID الفيديو لو عايز
+      const liveVideoId = "k9fOUw6uYYU"; // ← ضع هنا ID الفيديو لو عايز
       liveContainer.innerHTML = `
         <div class="live-frame">
           <iframe 
