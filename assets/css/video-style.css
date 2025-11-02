@@ -23,9 +23,10 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     font-size: 1.2rem;
-    display: flexbox;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
 }
 
 .no-live i {
