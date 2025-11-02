@@ -23,7 +23,8 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     font-size: 1.2rem;
-    display: flex;
+    display: grid;
+    place-items: center;
 }
 
 .no-live i {
