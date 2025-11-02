@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   } catch (error) {
     console.error("Error loading media:", error);
-    container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
+    container.innerHTML = `<p>There is an error </p>`;
   }
 });
 
