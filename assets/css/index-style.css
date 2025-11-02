@@ -1435,7 +1435,7 @@ section {
 
 /* شارة LIVE */
 /* ====== شارة البث المباشر (LIVE badge) ====== */
-.menu-item:nth-child(2).live-menu {
+.menu-item.live-menu {
     position: relative;
 }
 
