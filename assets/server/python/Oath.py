@@ -3,29 +3,27 @@ import requests
 
 app = Flask(__name__)
 
-API_KEY = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs"
+YOUTUBE_API_KEY = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs"
 CHANNEL_ID = "UCHxZfWDxxumOyTN0nvbRM5A"
 
 @app.route("/api/live")
 def check_live():
+    url = (
+        f"https://www.googleapis.com/youtube/v3/search?"
+        f"part=snippet&channelId={CHANNEL_ID}&eventType=live&type=video&key={YOUTUBE_API_KEY}"
+    )
+
     try:
-        url = f"https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={CHANNEL_ID}&eventType=live&type=video&key={API_KEY}"
         response = requests.get(url)
         data = response.json()
 
-        if data.get("items"):
-            video_id = data["items"][0]["id"]["videoId"]
-            title = data["items"][0]["snippet"]["title"]
-            return jsonify({
-                "live": True,
-                "videoId": video_id,
-                "title": title
-            })
+        if "items" in data and len(data["items"]) > 0:
+            live_video_id = data["items"][0]["id"]["videoId"]
+            return jsonify({"live": True, "videoId": live_video_id})
         else:
             return jsonify({"live": False})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
+        return jsonify({"live": False, "error": str(e)})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="127.0.0.1", port=5000)
