@@ -167,7 +167,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             <iframe 
               src="https://www.youtube.com/embed/${liveVideoId}" 
               allowfullscreen 
-              style="width:940px; height:100%; border-radius:16px;"
             ></iframe></div>
           `;
         } else {
