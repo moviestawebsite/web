@@ -204,8 +204,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>فشل تحميل المحتوى 😢</p>`;
   }
-  const liveBadge = document.getElementById("liveBadge");
-
   async function checkLiveStatus() {
     const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
     const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
