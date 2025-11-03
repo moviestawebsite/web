@@ -24,15 +24,19 @@
             outline: none;
         }
 
-        /* إخفاء الوقت الأصلي */
+        /* إخفاء الوقت الكلي */
+        video::-webkit-media-controls-time-remaining-display {
+            display: none !important;
+        }
+
+        /* تثبيت الوقت الحالي على 00:00 */
         video::-webkit-media-controls-current-time-display {
             color: transparent !important;
             position: relative;
         }
 
-        /* إضافة 00:00 فوقه */
         video::-webkit-media-controls-current-time-display::after {
-            content: "00:00" !important;
+            content: "00:00";
             color: white;
             position: absolute;
             left: 0;
