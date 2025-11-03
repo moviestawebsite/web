@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
   const liveBadge = document.getElementById("liveBadge");
 
+
   try {
     const response = await fetch("../data/json/videos-database.json");
     const data = await response.json();
@@ -179,6 +180,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
     }
+
+     if (videoItem.isLive) {
+    liveBadge.style.display = "inline-block"; // تظهر
+    showLive(videoItem.url);
+  } else {
+    liveBadge.style.display = "none"; // تختفي
+    showNoLive();
+  }
 
     // التعامل مع كروت الفيديو
     container.addEventListener("click", (e) => {
