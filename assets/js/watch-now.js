@@ -181,6 +181,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
+    if (videoItem.isLive) {
+      liveBadge.style.display = "inline-block"; // تظهر
+      showLive(videoItem.url);
+    } else {
+      liveBadge.style.display = "none"; // تختفي
+      showNoLive();
+    }
+
     // التعامل مع كروت الفيديو
     container.addEventListener("click", (e) => {
       const card = e.target.closest(".media-card");
