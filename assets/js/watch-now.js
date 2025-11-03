@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function loadLiveStream() {
       try {
-        // نعرض واجهة الفيديو
+        // نعرض واجهة الفيديو مبدئيًا
         liveContainer.innerHTML = `
           <div class="video-wrapper">
             <video id="liveVideo" autoplay muted controls playsinline></video>
@@ -173,18 +173,52 @@ document.addEventListener("DOMContentLoaded", async () => {
             const hls = new Hls();
             hls.loadSource(livepeerStreamURL);
             hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-              video.play();
+
+            // ✅ التحقق هل البث موجود فعلاً
+            hls.on(Hls.Events.ERROR, function (event, data) {
+              if (data.fatal) {
+                showNoLive();
+              }
             });
+
+            // ✅ عند تحميل الفيديو
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+              video.play().catch(() => { });
+            });
+
           } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
             video.src = livepeerStreamURL;
-            video.play();
+            video.play().catch(() => { });
           }
+
+          // 🧩 نثبت الفيديو عند 00:00
+          video.addEventListener("timeupdate", () => {
+            if (video.currentTime > 0) {
+              video.currentTime = 0;
+              video.pause();
+            }
+          });
         };
+
+        // لو عدت ثانيتين وما اشتغلش البث → نعرض no-live
+        setTimeout(() => {
+          if (video.readyState === 0 || video.networkState === 3) {
+            showNoLive();
+          }
+        }, 3000);
+
       } catch (err) {
         console.error("Live Error:", err);
-        liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
+        showNoLive();
       }
+    }
+
+    function showNoLive() {
+      liveContainer.innerHTML = `
+        <div class="no-live">
+          <h2>No Live</h2>
+        </div>
+      `;
     }
 
     await loadLiveStream();
@@ -214,6 +248,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
