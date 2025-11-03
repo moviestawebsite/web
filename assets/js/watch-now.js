@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
 
             // ✅ تشغيل الفيديو
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            hls.on(hls.Events.MANIFEST_PARSED, function () {
               video.play().catch(() => { });
             });
 
