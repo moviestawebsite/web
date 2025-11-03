@@ -18,18 +18,6 @@ video::-webkit-media-controls-time-remaining-display {
     display: none !important;
 }
 
-/* الوقت الثابت */
-.fixed-time {
-    position: absolute;
-    bottom: 12px;
-    left: 60px;
-    color: white;
-    font-family: monospace;
-    font-size: 13px;
-    pointer-events: none;
-    opacity: 0.9;
-}
-
 .no-live {
     text-align: center;
     width: 940px;
