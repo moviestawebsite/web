@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       isLive: true // false → يظهر No-live
     };
 
-    window.isLiveNow = videoItem.isLive;
+    localStorage.setItem("isLiveNow", videoItem.isLive ? "true" : "false");
 
     const liveBadge = document.getElementById("liveBadge");
 
