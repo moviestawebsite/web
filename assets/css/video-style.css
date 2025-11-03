@@ -18,6 +18,7 @@ video::-webkit-media-controls-time-remaining-display {
     display: none !important;
 }
 
+
 .no-live {
     text-align: center;
     width: 940px;
