@@ -208,7 +208,6 @@ function renderMediaCard(item) {
   `;
 }
 
-
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
   const loader1 = document.getElementById("popupLoader");
