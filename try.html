@@ -1,71 +1,20 @@
 <!DOCTYPE html>
-<html lang="ar">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بث مباشر</title>
-    <style>
-        body {
-            background: #0b0b0b;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        video {
-            width: 90%;
-            max-width: 900px;
-            border-radius: 16px;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 20px #00ff8855;
-            outline: none;
-        }
-
-        /* إخفاء الوقت الكلي */
-        video::-webkit-media-controls-time-remaining-display {
-            display: none !important;
-        }
-
-        /* تثبيت الوقت الحالي على 00:00 */
-        video::-webkit-media-controls-current-time-display {
-            color: transparent !important;
-            position: relative;
-        }
-
-        video::-webkit-media-controls-current-time-display::after {
-            content: "00:00";
-            color: white;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-    </style>
+    <title>Document</title>
 </head>
-
 <body>
+    <div class="live-container">
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/XXXXXXXXXXX?autoplay=1"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
 
-    <video id="liveVideo" autoplay muted playsinline controls></video>
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        const video = document.getElementById('liveVideo');
-        const videoSrc = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
-
-        if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(videoSrc);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
-            video.play();
-        }
-    </script>
 </body>
-
 </html>
