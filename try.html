@@ -23,6 +23,21 @@
             box-shadow: 0 0 20px #00ff8855;
             outline: none;
         }
+
+        /* إخفاء الوقت الأصلي */
+        video::-webkit-media-controls-current-time-display {
+            color: transparent !important;
+            position: relative;
+        }
+
+        /* إضافة 00:00 فوقه */
+        video::-webkit-media-controls-current-time-display::after {
+            content: "00:00";
+            color: white;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
     </style>
 </head>
 
