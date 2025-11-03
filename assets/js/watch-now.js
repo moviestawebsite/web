@@ -221,43 +221,6 @@ function renderMediaCard(item) {
   `;
 }
 
-function initializeAllVideoPlayersFor(video_player) {
-  if (video_player.dataset.initiated) return;
-  video_player.dataset.initiated = true;
-
-  const mainVideo = video_player.querySelector(".main-video");
-
-  // نسخ كل عناصر التحكم (controls, progress, volume ...) من initializeAllVideoPlayers
-  // مثال بسيط لتفعيل play/pause و progress bar:
-  const play_pause = document.createElement("span");
-  play_pause.classList.add("icon", "play_pause");
-  play_pause.innerHTML = "play_arrow";
-  video_player.appendChild(play_pause);
-
-  play_pause.addEventListener("click", () => {
-    if (mainVideo.paused) {
-      mainVideo.play();
-      play_pause.innerHTML = "pause";
-    } else {
-      mainVideo.pause();
-      play_pause.innerHTML = "play_arrow";
-    }
-  });
-
-  // مثال على progress bar
-  const progressBar = document.createElement("div");
-  progressBar.classList.add("progress-bar");
-  video_player.appendChild(progressBar);
-
-  mainVideo.addEventListener("timeupdate", () => {
-    const progress = (mainVideo.currentTime / mainVideo.duration) * 100;
-    progressBar.style.width = progress + "%";
-  });
-
-  // هنا ممكن تضيف بقية التحكمات (volume, fullscreen, captions ...) بنفس الطريقة
-}
-
-
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
   const loader1 = document.getElementById("popupLoader");
