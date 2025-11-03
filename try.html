@@ -3,71 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>اختبار بث Livepeer</title>
+  <title>بث مباشر</title>
   <style>
     body {
       background: #0b0b0b;
-      color: #fff;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     video {
       width: 90%;
-      max-width: 800px;
-      border-radius: 12px;
+      max-width: 900px;
+      border-radius: 16px;
       border: 2px solid #00ff88;
-      box-shadow: 0 0 15px #00ff8855;
-    }
-    h1 {
-      color: #00ff88;
-      margin-bottom: 20px;
+      box-shadow: 0 0 20px #00ff8855;
+      outline: none;
+      /* إخفاء أدوات التحكم بالكامل */
+      -webkit-media-controls-panel {
+        display: none !important;
+        opacity: 0 !important;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🎥 بث مباشر من Livepeer</h1>
 
-  <video id="liveVideo" controls autoplay muted playsinline></video>
+  <video id="liveVideo" autoplay muted playsinline></video>
 
-  <p id="status" style="color:#ccc; margin-top:15px;">⏳ جاري التحميل...</p>
-
-  <!-- مكتبة HLS -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
   <script>
     const video = document.getElementById('liveVideo');
-    const statusText = document.getElementById('status');
     const videoSrc = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
 
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
-
       hls.on(Hls.Events.MANIFEST_PARSED, function() {
         video.play();
-        statusText.textContent = "✅ تم تحميل البث، في انتظار التشغيل...";
-        statusText.style.color = "#00ff88";
       });
-
-      hls.on(Hls.Events.ERROR, function(event, data) {
-        statusText.textContent = "❌ خطأ أثناء تحميل البث، ربما غير متاح الآن.";
-        statusText.style.color = "#ff5555";
-      });
-
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
-      video.addEventListener('loadedmetadata', () => {
-        video.play();
-        statusText.textContent = "✅ تم التشغيل.";
-      });
-    } else {
-      statusText.textContent = "❌ متصفحك لا يدعم تشغيل البث المباشر HLS.";
+      video.play();
     }
   </script>
 </body>
