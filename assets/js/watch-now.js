@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       isLive: true // false → يظهر No-live
     };
 
-    v
+    window.isLiveNow = videoItem.isLive;
 
     if (videoItem.isLive) showLive(videoItem.url);
     else showNoLive();
