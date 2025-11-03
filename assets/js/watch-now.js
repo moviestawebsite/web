@@ -149,12 +149,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const liveContainer = document.getElementById("liveContainer");
 
-    // 🎥 بث مباشر من Livepeer
+    // 🎥 رابط البث من Livepeer
     const livepeerStreamURL = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
 
     async function loadLiveStream() {
       try {
-        // نعرض واجهة الفيديو مبدئيًا
+        // أولاً نعرض عنصر الفيديو
         liveContainer.innerHTML = `
           <div class="video-wrapper">
             <video id="liveVideo" autoplay muted controls playsinline></video>
@@ -174,14 +174,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             hls.loadSource(livepeerStreamURL);
             hls.attachMedia(video);
 
-            // ✅ التحقق هل البث موجود فعلاً
+            // ✅ لو حصل خطأ أثناء التحميل أو البث غير موجود
             hls.on(Hls.Events.ERROR, function (event, data) {
               if (data.fatal) {
                 showNoLive();
               }
             });
 
-            // ✅ عند تحميل الفيديو
+            // ✅ تشغيل الفيديو
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
               video.play().catch(() => { });
             });
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             video.play().catch(() => { });
           }
 
-          // 🧩 نثبت الفيديو عند 00:00
+          // ⏸️ نوقف التقدم عند 00:00
           video.addEventListener("timeupdate", () => {
             if (video.currentTime > 0) {
               video.currentTime = 0;
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
         };
 
-        // لو عدت ثانيتين وما اشتغلش البث → نعرض no-live
+        // ⏳ لو بعد 3 ثواني الفيديو مش جاهز → نعرض no-live
         setTimeout(() => {
           if (video.readyState === 0 || video.networkState === 3) {
             showNoLive();
@@ -213,10 +213,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
+    // 🟥 دالة عرض no-live بنفس التصميم القديم
     function showNoLive() {
       liveContainer.innerHTML = `
         <div class="no-live">
-          <h2>No Live</h2>
+          <div class="txt-nt-live">
+            <i class="fa-solid fa-video-slash"></i>
+            <p>There is no live right now</p>
+          </div>
         </div>
       `;
     }
