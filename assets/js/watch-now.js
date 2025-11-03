@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // مثال: اختر الفيديو من JSON أو ضع رابط مباشر
     const videoItem = {
       url: "../videos/my-video.mp4", // رابط الفيديو
-      isLive: true // false → يظهر No-live
+      isLive: false // false → يظهر No-live
     };
 
     if (videoItem.isLive) showLive(videoItem.url);
