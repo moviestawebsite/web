@@ -1,71 +1,70 @@
 <!DOCTYPE html>
 <html lang="ar">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بث مباشر</title>
-    <style>
-        body {
-            background: #0b0b0b;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Stream</title>
+  <style>
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-        video {
-            width: 90%;
-            max-width: 900px;
-            border-radius: 16px;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 20px #00ff8855;
-            outline: none;
-        }
+    .video-wrapper {
+      position: relative;
+      display: inline-block;
+    }
 
-        /* إخفاء الوقت الكلي */
-        video::-webkit-media-controls-time-remaining-display {
-            display: none !important;
-        }
+    video {
+      width: 600px;
+      border-radius: 12px;
+    }
 
-        /* تثبيت الوقت الحالي على 00:00 */
-        video::-webkit-media-controls-current-time-display {
-            color: transparent !important;
-            position: relative;
-        }
+    /* نخفي الوقت الحقيقي */
+    video::-webkit-media-controls-current-time-display,
+    video::-webkit-media-controls-time-remaining-display {
+      display: none !important;
+    }
 
-        video::-webkit-media-controls-current-time-display::after {
-            content: "00:00";
-            color: white;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-    </style>
+    /* نضيف وقت ثابت 00:00 في نفس المكان */
+    .fixed-time {
+      position: absolute;
+      bottom: 12px;
+      left: 55px; /* عدلها حسب شكل المتصفح لو عايز */
+      color: white;
+      font-family: monospace;
+      font-size: 13px;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="video-wrapper">
+    <video id="liveVideo" autoplay muted controls playsinline></video>
+    <div class="fixed-time">00:00</div>
+  </div>
 
-    <video id="liveVideo" autoplay muted playsinline controls></video>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('liveVideo');
+    const videoSrc = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        const video = document.getElementById('liveVideo');
-        const videoSrc = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
-
-        if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(videoSrc);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
-            video.play();
-        }
-    </script>
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+      video.play();
+    }
+  </script>
 </body>
-
 </html>
