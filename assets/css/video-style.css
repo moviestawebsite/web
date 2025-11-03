@@ -1,18 +1,33 @@
-.live-frame {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px auto;
+.video-wrapper {
+    position: relative;
     width: 100%;
-    height: 400px;
+    max-width: 800px;
+    margin: auto;
 }
 
-.live-frame iframe {
-    border: none;
-    border-radius: 14px;
-    width: 940px;
-    height: 100%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+video {
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+    background: #000;
+}
+
+/* إخفاء الوقت الحقيقي */
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    display: none !important;
+}
+
+/* الوقت الثابت */
+.fixed-time {
+    position: absolute;
+    bottom: 12px;
+    left: 60px;
+    color: white;
+    font-family: monospace;
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0.9;
 }
 
 .no-live {
