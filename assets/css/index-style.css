@@ -1448,6 +1448,7 @@ section {
     display: inline-block;
     animation: blink 1.2s infinite;
     transition: all 0.3s ease;
+    display: none;
     vertical-align: middle;
 }
 
