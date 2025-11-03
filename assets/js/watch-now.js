@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     window.mediaData = data.media;
 
-    // هنا بننشئ العنصر الأساسي للصفحة
+    // إنشاء المحتوى الأساسي للصفحة
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
@@ -147,38 +147,41 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `;
 
-    // 🔹 هنا نحمّل البث المباشر ديناميكيًا من YouTube API
-    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A";
-    const apiKey = "AIzaSyCTjK97VrKfcu9zeV3V4PnPPE_UzfpSPOs";
-
     const liveContainer = document.getElementById("liveContainer");
+
+    // 🎥 بث مباشر من Livepeer
+    const livepeerStreamURL = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
 
     async function loadLiveStream() {
       try {
-        const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-        );
-        const liveData = await res.json();
+        // نعرض واجهة الفيديو
+        liveContainer.innerHTML = `
+          <div class="video-wrapper">
+            <video id="liveVideo" autoplay muted controls playsinline></video>
+            <div class="fixed-time">00:00</div>
+          </div>
+        `;
 
-        if (liveData.items && liveData.items.length > 0) {
-          const liveVideoId = liveData.items[0].id.videoId;
-          liveContainer.innerHTML = `
-            <div class="live-frame">
-            <iframe 
-              src="https://www.youtube.com/embed/${liveVideoId}" 
-              allowfullscreen 
-            ></iframe></div>
-          `;
-        } else {
-          liveContainer.innerHTML = `
-            <div class="no-live">
-              <div class="txt-nt-live">
-                <i class="fa-solid fa-video-slash"></i>
-                <p>There is no live right now</p>
-              </div>
-            </div>
-          `;
-        }
+        const video = document.getElementById("liveVideo");
+
+        // تحميل مكتبة HLS.js
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/hls.js@latest";
+        document.body.appendChild(script);
+
+        script.onload = () => {
+          if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(livepeerStreamURL);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+              video.play();
+            });
+          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = livepeerStreamURL;
+            video.play();
+          }
+        };
       } catch (err) {
         console.error("Live Error:", err);
         liveContainer.innerHTML = `<p style="color:#ccc;">There is an error loading the live</p>`;
@@ -187,7 +190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await loadLiveStream();
 
-    // 🔹 باقي كودك العادي
+    // باقي الكود
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
@@ -199,7 +202,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (item) openPopup(item);
     });
-
   } catch (error) {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>There is an error loading items</p>`;
@@ -213,6 +215,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
