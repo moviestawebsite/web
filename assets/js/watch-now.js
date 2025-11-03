@@ -158,7 +158,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         liveContainer.innerHTML = `
           <div class="video-wrapper">
             <video id="liveVideo" autoplay muted controls playsinline></video>
-            <div class="fixed-time">00:00</div>
           </div>
         `;
 
