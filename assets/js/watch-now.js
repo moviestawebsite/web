@@ -175,9 +175,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 🔴 دالة عرض Live بالنقطة الحمراء
     function showLive(url) {
       liveContainer.innerHTML = `
-        <div class="video-wrapper" style="position:relative;">
-          <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
-        </div>
+      <div class="video-wrapper" style="position:relative;">
+        <div class="video_player">
+          <video preload="metadata" class="main-video" src="${url}" autoplay muted loop></video>
+      < /div>
+    </div>
       `;
     }
 
