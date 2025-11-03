@@ -178,8 +178,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="video-wrapper" style="position:relative;">
         <div class="video_player">
           <video preload="metadata" class="main-video" src="${url}" autoplay muted loop></video>
-      < /div>
-    </div>
+        </div>
+      </div>
       `;
     }
 
