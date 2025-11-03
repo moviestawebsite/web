@@ -139,6 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     window.mediaData = data.media;
 
+    // العنصر الرئيسي للصفحة
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
@@ -147,66 +148,64 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     const liveContainer = document.getElementById("liveContainer");
+
+    // 🔹 إعداد رابط البث من Livepeer
     const livepeerUrl = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
 
-    showLoading();
+    async function checkLiveStream() {
+      try {
+        // نجرب نعمل طلب للرابط علشان نعرف هل في بث شغال ولا لأ
+        const res = await fetch(livepeerUrl, { method: "HEAD" });
 
-    // نحاول نعرض الفيديو مباشرة
-    const video = document.createElement("video");
-    video.controls = true;
-    video.autoplay = true;
-    video.muted = true;
-    video.playsInline = true;
-    video.innerHTML = `<source src="${livepeerUrl}" type="application/x-mpegURL">`;
+        if (res.ok) {
+          // ✅ في بث شغال
+          liveContainer.innerHTML = `
+            <div class="live-frame">
+              <video controls autoplay muted playsinline>
+                <source src="${livepeerUrl}" type="application/x-mpegURL">
+                متصفحك لا يدعم الفيديو المباشر.
+              </video>
+            </div>
+          `;
+        } else {
+          // ❌ مفيش بث حاليًا
+          showNoLive();
+        }
+      } catch (err) {
+        console.warn("Live check failed:", err);
+        showNoLive();
+      }
+    }
 
-    // لما يبدأ التشغيل
-    video.addEventListener("playing", () => {
-      liveContainer.innerHTML = "";
-      liveContainer.appendChild(video);
-    });
+    function showNoLive() {
+      liveContainer.innerHTML = `
+        <div class="no-live">
+          <div class="txt-nt-live">
+            <i class="fa-solid fa-video-slash"></i>
+            <p>There is no live right now</p>
+          </div>
+        </div>
+      `;
+    }
 
-    // لو فشل التشغيل (يعني مفيش بث)
-    video.addEventListener("error", () => {
-      showNoLive();
-    });
+    await checkLiveStream();
 
-    liveContainer.appendChild(video);
-
+    // 🔹 باقي كودك العادي
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
       const card = e.target.closest(".media-card");
       if (!card) return;
+
       const id = card.dataset.id;
       const item = window.mediaData.find((m) => m.id === id);
+
       if (item) openPopup(item);
     });
 
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error("Error loading media:", error);
     container.innerHTML = `<p>There is an error loading items</p>`;
-  }
-
-  function showNoLive() {
-    const liveContainer = document.getElementById("liveContainer");
-    liveContainer.innerHTML = `
-      <div class="no-live">
-        <div class="txt-nt-live">
-          <i class="fa-solid fa-video-slash"></i>
-          <p>There is no live right now</p>
-        </div>
-      </div>
-    `;
-  }
-
-  function showLoading() {
-    const liveContainer = document.getElementById("liveContainer");
-    liveContainer.innerHTML = `
-      <div class="loading-live">
-        <div class="spinner"></div>
-        <p>Checking for live stream...</p>
-      </div>
-    `;
   }
 });
 
@@ -217,6 +216,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
