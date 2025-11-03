@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 🟢 هنا الفيديو العادي بتاعك
     const videoUrl = "https://www.dropbox.com/scl/fi/5dxouijclhn7dngh6ba6h/anyone-but-u.jpg?rlkey=f57nalwf0bmgqt2yyuttohowj&st=pto4fji2&dl=0"; // أو رابط mp4
-    const isLive = false; // false عشان يظهر No-live كأن لا يوجد بث حقيقي
+    const isLive = true; // false عشان يظهر No-live كأن لا يوجد بث حقيقي
 
     if (isLive) {
       liveContainer.innerHTML = `
