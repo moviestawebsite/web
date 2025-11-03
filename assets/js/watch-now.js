@@ -149,14 +149,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const liveContainer = document.getElementById("liveContainer");
 
-    // 🎬 اختر الفيديو هنا
-    const videoUrl = "../videos/my-video.mp4"; // مسار الفيديو أو رابط mp4
-    const isLive = true; // true يظهر النقطة الحمراء + Live، false يظهر No-live
+    // 🎥 قناة اليوتيوب الخاصة بيك (بدّلها لو عايز)
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A"; // ضع هنا ID القناة
+    const embedUrl = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1`;
 
-    if (isLive) showLive(videoUrl);
-    else showNoLive();
+    async function loadYouTubeLive() {
+      try {
+        // نجرب نجيب صفحة القناة /live علشان نعرف لو في بث فعلي ولا لأ
+        const res = await fetch(`https://www.youtube.com/channel/${channelId}/live`);
+        const text = await res.text();
+        const isLive = text.includes('"isLive":true');
 
-    // 🟥 دالة عرض No-live
+        if (isLive) {
+          liveContainer.innerHTML = `
+            <div class="video-wrapper">
+              <iframe 
+                id="liveVideo"
+                src="${embedUrl}"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
+          `;
+        } else {
+          showNoLive();
+        }
+      } catch (err) {
+        console.error("YouTube Live Error:", err);
+        showNoLive();
+      }
+    }
+
+    // 🟥 دالة عرض no-live بنفس الشكل القديم
     function showNoLive() {
       liveContainer.innerHTML = `
         <div class="no-live">
@@ -168,18 +192,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
-    // 🔴 دالة عرض Live بالنقطة الحمراء
-    function showLive(url) {
-      liveContainer.innerHTML = `
-        <div class="video-wrapper" style="position:relative;">
-          <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
-          <div class="live-indicator">
-            <span class="red-dot"></span>
-            <p>Live</p>
-          </div>
-        </div>
-      `;
-    }
+    await loadYouTubeLive();
+
+    // باقي الكود العادي
+    fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
       const card = e.target.closest(".media-card");
@@ -196,7 +212,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// إنشاء كل كارت فيديو
 function renderMediaCard(item) {
   return `
     <div class="media-card" data-id="${item.id}">
@@ -204,7 +219,6 @@ function renderMediaCard(item) {
     </div>
   `;
 }
-
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
