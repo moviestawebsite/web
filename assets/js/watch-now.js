@@ -189,6 +189,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       showNoLive();
     }
 
+    fixDropboxLinks();
+
     // التعامل مع كروت الفيديو
     container.addEventListener("click", (e) => {
       const card = e.target.closest(".media-card");
