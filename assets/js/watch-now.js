@@ -149,71 +149,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const liveContainer = document.getElementById("liveContainer");
 
-    // 🎥 رابط البث من Livepeer
-    const livepeerStreamURL = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
+    // 🎥 قناة اليوتيوب الخاصة بيك (بدّلها لو عايز)
+    const channelId = "UCHxZfWDxxumOyTN0nvbRM5A"; // ضع هنا ID القناة
+    const embedUrl = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1`;
 
-    async function loadLiveStream() {
+    async function loadYouTubeLive() {
       try {
-        // أولاً نعرض عنصر الفيديو
-        liveContainer.innerHTML = `
-          <div class="video-wrapper">
-            <video id="liveVideo" autoplay controls playsinline></video>
-          </div>
-        `;
+        // نجرب نجيب صفحة القناة /live علشان نعرف لو في بث فعلي ولا لأ
+        const res = await fetch(`https://www.youtube.com/channel/${channelId}/live`);
+        const text = await res.text();
+        const isLive = text.includes('"isLive":true');
 
-        const video = document.getElementById("liveVideo");
-
-        // تحميل مكتبة HLS.js
-        const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/npm/hls.js@latest";
-        document.body.appendChild(script);
-
-        script.onload = () => {
-          if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(livepeerStreamURL);
-            hls.attachMedia(video);
-
-            // ✅ لو حصل خطأ أثناء التحميل أو البث غير موجود
-            hls.on(Hls.Events.ERROR, function (event, data) {
-              if (data.fatal) {
-                showNoLive();
-              }
-            });
-
-            // ✅ تشغيل الفيديو
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-              video.play().catch(() => { });
-            });
-
-          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-            video.src = livepeerStreamURL;
-            video.play().catch(() => { });
-          }
-
-          // ⏸️ نوقف التقدم عند 00:00
-          video.addEventListener("timeupdate", () => {
-            if (video.currentTime > 0) {
-              video.currentTime = 0;
-              video.pause();
-            }
-          });
-        };
-
-        // ⏳ لو بعد 3 ثواني الفيديو مش جاهز → نعرض no-live
-        setTimeout(() => {
-          if (video.readyState === 0 || video.networkState === 3) {
-            showNoLive();
-          }
-        }, 3000);
-
+        if (isLive) {
+          liveContainer.innerHTML = `
+            <div class="video-wrapper">
+              <iframe 
+                id="liveVideo"
+                src="${embedUrl}"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
+          `;
+        } else {
+          showNoLive();
+        }
       } catch (err) {
-        console.error("Live Error:", err);
+        console.error("YouTube Live Error:", err);
         showNoLive();
       }
     }
 
-    // 🟥 دالة عرض no-live بنفس التصميم القديم
+    // 🟥 دالة عرض no-live بنفس الشكل القديم
     function showNoLive() {
       liveContainer.innerHTML = `
         <div class="no-live">
@@ -225,9 +192,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
-    await loadLiveStream();
+    await loadYouTubeLive();
 
-    // باقي الكود
+    // باقي الكود العادي
     fixDropboxLinks();
 
     container.addEventListener("click", (e) => {
@@ -252,6 +219,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
