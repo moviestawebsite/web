@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // أولاً نعرض عنصر الفيديو
         liveContainer.innerHTML = `
           <div class="video-wrapper">
-            <video id="liveVideo" autoplay muted controls playsinline></video>
+            <video id="liveVideo" autoplay controls playsinline></video>
           </div>
         `;
 
