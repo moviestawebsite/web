@@ -1,53 +1,58 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بث مباشر</title>
-  <style>
-    body {
-      background: #0b0b0b;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    video {
-      width: 90%;
-      max-width: 900px;
-      border-radius: 16px;
-      border: 2px solid #00ff88;
-      box-shadow: 0 0 20px #00ff8855;
-      outline: none;
-      /* إخفاء أدوات التحكم بالكامل */
-      -webkit-media-controls-panel {
-        display: none !important;
-        opacity: 0 !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بث مباشر</title>
+    <style>
+        body {
+            background: #0b0b0b;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        video {
+            width: 90%;
+            max-width: 900px;
+            border-radius: 16px;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px #00ff8855;
+            outline: none;
+
+            /* إخفاء أدوات التحكم بالكامل */
+            -webkit-media-controls-panel {
+                display: none !important;
+                opacity: 0 !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <video id="liveVideo" autoplay muted playsinline></video>
+    <video id="liveVideo" autoplay muted playsinline></video>
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    const video = document.getElementById('liveVideo');
-    const videoSrc = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        const video = document.getElementById('liveVideo');
+        const videoSrc = "https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8";
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function() {
-        video.play();
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
-      video.play();
-    }
-  </script>
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+            video.play();
+        }
+    </script>
 </body>
+
 </html>
