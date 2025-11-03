@@ -134,13 +134,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
   const liveBadge = document.getElementById("liveBadge");
 
-  if (videoItem.isLive) {
-    liveBadge.style.display = "inline-block"; // تظهر
-    showLive(videoItem.url);
-  } else {
-    liveBadge.style.display = "none"; // تختفي
-    showNoLive();
-  }
 
   try {
     const response = await fetch("../data/json/videos-database.json");
