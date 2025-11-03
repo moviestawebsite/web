@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // مثال: اختر الفيديو من JSON أو ضع رابط مباشر
     const videoItem = {
-      url: "../videos/my-video.mp4", // رابط الفيديو
+      url: "https://www.dropbox.com/scl/fi/zyz1cp6x6nc8bhqra5uy7/Anyone-but-you.mp4?rlkey=ydiuh3lv649yibf3ocfplneqr&st=z5wmewiu&dl=0", // رابط الفيديو
       isLive: true // false → يظهر No-live
     };
 
