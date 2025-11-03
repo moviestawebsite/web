@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختبار البث من Livepeer</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+    h1 {
+      color: #00ff88;
+      margin-bottom: 20px;
+    }
+    video {
+      width: 90%;
+      max-width: 800px;
+      border: 2px solid #00ff88;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ff88aa;
+    }
+  </style>
 </head>
-
 <body>
-    <video width="640" height="500">
-        <source src="https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8">
-    </video>
-</body>
+  <h1>🎥 بث مباشر من Livepeer (اختبار)</h1>
 
+  <video id="liveVideo" controls autoplay muted playsinline>
+    <source src="https://livepeercdn.studio/hls/6e7156bbol6i85ry/index.m3u8" type="application/x-mpegURL">
+    متصفحك لا يدعم الفيديو المباشر.
+  </video>
+
+  <p id="status" style="color:#ccc; margin-top:15px;">⏳ جاري التحميل...</p>
+
+  <script>
+    const video = document.getElementById("liveVideo");
+    const statusText = document.getElementById("status");
+
+    video.addEventListener("playing", () => {
+      statusText.textContent = "✅ البث شغال الآن!";
+      statusText.style.color = "#00ff88";
+    });
+
+    video.addEventListener("error", () => {
+      statusText.textContent = "❌ لا يوجد بث مباشر حاليًا أو الرابط غير صالح.";
+      statusText.style.color = "#ff5555";
+    });
+  </script>
+</body>
 </html>
