@@ -175,9 +175,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       liveContainer.innerHTML = `
         <div class="video-wrapper" style="position:relative;">
           <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
-          <div class="live-indicator">
-            <div class="live-badge"></div>
-          </div>
         </div>
       `;
     }
