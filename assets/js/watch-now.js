@@ -183,6 +183,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
+    ؤonst video_player = liveContainer.querySelector(".video_player");
+    if (video_player) initializeAllVideoPlayersFor(video_player);
+
     if (videoItem.isLive) {
       liveBadge.style.display = "inline-block"; // تظهر
       showLive(videoItem.url);
