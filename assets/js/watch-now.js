@@ -134,14 +134,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
   const liveBadge = document.getElementById("liveBadge");
 
-
   try {
     const response = await fetch("../data/json/videos-database.json");
     const data = await response.json();
 
     window.mediaData = data.media;
 
-    // إنشاء المحتوى الأساسي للصفحة
+    // إنشاء كروت الفيديو + حاوية البث
     container.innerHTML = `
       <div id="liveContainer" class="live-frame"></div>
       <div class="media-grid">
@@ -151,16 +150,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const liveContainer = document.getElementById("liveContainer");
 
-    // مثال: اختر الفيديو من JSON أو ضع رابط مباشر
-    const videoItem = {
-      url: "../videos/my-video.mp4", // رابط الفيديو
-      isLive: true // false → يظهر No-live
-    };
+    // عند الضغط على أي كارت فيديو
+    container.addEventListener("click", (e) => {
+      const card = e.target.closest(".media-card");
+      if (!card) return;
 
-    if (videoItem.isLive) showLive(videoItem.url);
-    else showNoLive();
+      const id = card.dataset.id;
+      const item = window.mediaData.find((m) => m.id === id);
 
-    // 🟥 دالة عرض No-live
+      if (item && item.url) {
+        if (item.isLive) {
+          liveBadge.style.display = "inline-block"; // إظهار الـ Live Badge
+          showLive(item.url);
+        } else {
+          liveBadge.style.display = "none"; // إخفاء الـ Live Badge
+          showNoLive();
+        }
+      }
+    });
+
+    // دوال عرض الفيديو أو No-live
+    function showLive(url) {
+      liveContainer.innerHTML = `
+        <div class="video-wrapper" style="position:relative;">
+          <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
+          <div class="live-indicator">
+            <span class="red-dot"></span>
+            <p>Live</p>
+          </div>
+        </div>
+      `;
+    }
+
     function showNoLive() {
       liveContainer.innerHTML = `
         <div class="no-live">
@@ -172,33 +193,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
-    // 🔴 دالة عرض Live بالنقطة الحمراء
-    function showLive(url) {
-      liveContainer.innerHTML = `
-        <div class="video-wrapper" style="position:relative;">
-          <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
-        </div>
-      `;
-    }
-
-    if (videoItem.isLive) {
-      liveBadge.style.display = "inline-block"; // تظهر
-      showLive(videoItem.url);
-    } else {
-      liveBadge.style.display = "none"; // تختفي
-      showNoLive();
-    }
-
-    // التعامل مع كروت الفيديو
-    container.addEventListener("click", (e) => {
-      const card = e.target.closest(".media-card");
-      if (!card) return;
-
-      const id = card.dataset.id;
-      const item = window.mediaData.find((m) => m.id === id);
-
-      if (item) openPopup(item);
-    });
   } catch (error) {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>There is an error loading items</p>`;
@@ -208,11 +202,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 // إنشاء كل كارت فيديو
 function renderMediaCard(item) {
   return `
-    <div class="media-card" data-id="${item.id}">
+    <div class="media-card" data-id="${item.id}" data-url="${item.url}" data-islive="${item.isLive}">
         <img src="${item.image}" alt="${item.title}" class="media-thumb" />
+        <p class="media-title">${item.title}</p>
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
