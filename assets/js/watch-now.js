@@ -176,7 +176,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     function showLive(url) {
       liveContainer.innerHTML = `
         <div class="video-wrapper" style="position:relative;">
-          <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
+          <div class="container-control">
+              <div class="video_player">
+                <video preload="metadata" class="main-video">
+                  <source src="${item.video_url_720}" size="720" type="video/mp4">
+                </video>
+              </div>
+            </div>
         </div>
       `;
     }
