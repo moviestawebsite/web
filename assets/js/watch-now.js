@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="video-wrapper" style="position:relative;">
           <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
           <div class="live-indicator">
-            <span class="live-badge"></span>
+            <div class="live-badge"></div>
             <p>Live</p>
           </div>
         </div>
