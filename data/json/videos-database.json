@@ -20,7 +20,7 @@
       "title": "Siccin 8",
       "page": "game2.html",
       "what": "Watch",
-      // "isLive": false
+      "isLive": false
     },
     {
       "image": "images/game3.jpg",
@@ -28,7 +28,7 @@
       "title": "Siccin 8",
       "page": "game3.html",
       "what": "Watch",
-      // "isLive": false
+      "isLive": false
     }
   ]
 }
