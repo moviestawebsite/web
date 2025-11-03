@@ -1,4 +1,3 @@
-// live-point.js
 document.addEventListener("DOMContentLoaded", () => {
   const liveBadge = document.getElementById("liveBadge");
   if (liveBadge) {
