@@ -132,6 +132,8 @@ clearBtn.addEventListener("click", () => {
 // ======================= كود تحميل الفيديوهات =======================
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
+   const liveBadge = document.getElementById("liveBadge");
+
 
   try {
     const response = await fetch("../data/json/videos-database.json");
