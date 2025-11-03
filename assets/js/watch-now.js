@@ -181,9 +181,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       </div>
       `;
-      const video_player = liveContainer.querySelector(".video_player");
-      if (video_player) initializeAllVideoPlayersFor(video_player);
     }
+    const video_player = liveContainer.querySelector(".video_player");
+    if (video_player) initializeAllVideoPlayersFor(video_player);
 
 
     if (videoItem.isLive) {
