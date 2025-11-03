@@ -24,6 +24,10 @@
             outline: none;
         }
 
+        video::-webkit-media-controls-current-time-display,
+        video::-webkit-media-controls-time-remaining-display {
+            content: '00:00';
+        }
 
         video::-webkit-media-controls-current-time-display::after {
             content: "00:00";
