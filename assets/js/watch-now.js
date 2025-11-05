@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     // إرسال الحالة إلى PHP لتحديث live-status.json
-    fetch(`../php/live-status-json.php?status=${videoItem.isLive ? "true" : "false"}`)
+    fetch(`../assets/php/live-status-json.php?status=${videoItem.isLive ? "true" : "false"}`)
       .then(res => res.text())
       .then(msg => console.log(msg))
       .catch(err => console.error("Error updating live status:", err));
