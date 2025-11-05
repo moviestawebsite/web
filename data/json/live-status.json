@@ -1,4 +1,5 @@
 {
-    ""
-    "isLive" : true
+    "live" :{
+        "isLive": true
+    }
 }
