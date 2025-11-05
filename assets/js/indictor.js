@@ -1,14 +1,17 @@
-// live-status.js
 document.addEventListener("DOMContentLoaded", async () => {
+  const liveBadge = document.getElementById("liveBadge");
+
   try {
-    const response = await fetch("../data/json/videos-database.json");
+    const response = await fetch("../data/json/live-status.json?_=" + Date.now());
     const data = await response.json();
 
-    // افترض إن فيه مفتاح اسمه isLive فى JSON
-    const isLive = data.isLive;
+    if (data.isLive) {
+      liveBadge.style.display = "block";
+    } else {
+      liveBadge.style.display = "none";
+    }
 
-    localStorage.setItem("liveStatus", isLive ? "true" : "false");
   } catch (error) {
-    console.error("Error fetching live status:", error);
+    console.error("Error loading live status:", error);
   }
 });
