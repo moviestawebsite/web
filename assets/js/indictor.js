@@ -1,10 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const liveBadge = document.getElementById("liveBadge");
-  if (!liveBadge) return; // لو مفيش badge موجود في الصفحة
+// live-status.js
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const isLive = data.isLive;
 
-  // جلب الحالة من localStorage
-  const isLive = localStorage.getItem("isLiveNow") === "true";
-
-  // التحكم في العرض
-  liveBadge.style.display = isLive ? "inline-block" : "none";
+    localStorage.setItem("liveStatus", isLive ? "true" : "false");
+  } catch (error) {
+    console.error("Error fetching live status:", error);
+  }
 });
