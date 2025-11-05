@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const liveBadge = document.getElementById("liveBadge");
 
     // جلب بيانات اللايف من JSON
-    const liveData = data.live;
+    const liveData = status_now.live;
 
     // لو في بث مباشر
     if (liveData && liveData.isLive === true) {
