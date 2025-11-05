@@ -135,7 +135,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch("../data/json/videos-database.json");
-    const status = await fetch
+    const status = await fetch("../data/json/live-status.json");
+    const status_
     const data = await response.json();
 
     window.mediaData = data.media;
