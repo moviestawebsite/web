@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch("../data/json/videos-database.json");
+    const status = await fetch
     const data = await response.json();
 
     window.mediaData = data.media;
@@ -148,19 +149,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     const liveContainer = document.getElementById("liveContainer");
-
-    // مثال: اختر الفيديو من JSON أو ضع رابط مباشر
-    const videoItem = {
-      url: "https://www.dropbox.com/scl/fi/zyz1cp6x6nc8bhqra5uy7/Anyone-but-you.mp4?rlkey=ydiuh3lv649yibf3ocfplneqr&st=z5wmewiu&dl=0", // رابط الفيديو
-      isLive: true // false → يظهر No-live
-    };
-
-    localStorage.setItem("isLiveNow", videoItem.isLive ? "true" : "false");
-
     const liveBadge = document.getElementById("liveBadge");
 
-    if (videoItem.isLive) showLive(videoItem.url);
-    else showNoLive();
+    // جلب بيانات اللايف من JSON
+    const liveData = data.live;
+
+    // لو في بث مباشر
+    if (liveData && liveData.isLive === true) {
+      showLive(liveData.url);
+      if (liveBadge) liveBadge.style.display = "inline-block";
+    } else {
+      showNoLive();
+      if (liveBadge) liveBadge.style.display = "none";
+    }
 
     // 🟥 دالة عرض No-live
     function showNoLive() {
@@ -174,21 +175,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }
 
-    // 🔴 دالة عرض Live بالنقطة الحمراء
+    // 🔴 دالة عرض Live
     function showLive(url) {
       liveContainer.innerHTML = `
         <div class="video-wrapper" style="position:relative;">
           <video id="liveVideo" src="${url}" autoplay muted loop controls></video>
         </div>
       `;
-    }
-
-    if (videoItem.isLive) {
-      liveBadge.style.display = "inline-block"; // تظهر
-      showLive(videoItem.url);
-    } else {
-      liveBadge.style.display = "none"; // تختفي
-      showNoLive();
     }
 
     fixDropboxLinks();
@@ -203,13 +196,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (item) openPopup(item);
     });
+
   } catch (error) {
     console.error("Error loading media:", error);
     container.innerHTML = `<p>There is an error loading items</p>`;
   }
 });
 
-// إنشاء كل كارت فيديو
+// إنشاء كروت الفيديو
 function renderMediaCard(item) {
   return `
     <div class="media-card" data-id="${item.id}">
@@ -217,6 +211,7 @@ function renderMediaCard(item) {
     </div>
   `;
 }
+
 
 // ======================= كود الـ Popup =======================
 function openPopup(item) {
