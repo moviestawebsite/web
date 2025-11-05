@@ -134,10 +134,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("mainContainer");
 
   try {
-    const response = await fetch("../data/json/videos-database.json");
-    const status = await fetch("../data/json/live-status.json");
-    const status_now = await status.json();
-    const data = await response.json();
+    const [dataResponse, statusResponse] = await Promise.all([
+      fetch("../data/json/videos-database.json"),
+      fetch("../data/json/live-status.json")
+    ]);
+
+    const data = await dataResponse.json();
+    const status_now = await statusResponse.json();
 
     window.mediaData = data.media;
 
