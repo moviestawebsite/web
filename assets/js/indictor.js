@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const liveBadge = document.getElementById("liveBadge");
 
   try {
-    const response = await fetch("../data/json/live-status.json?_=" + Date.now());
+    const response = await fetch("data/json/live-status.json?_=" + Date.now());
     const data = await response.json();
 
     if (data.isLive) {
