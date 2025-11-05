@@ -7,20 +7,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       const response = await fetch("data/json/live-status.json?_=" + Date.now());
       const data = await response.json();
 
+      // الوصول إلى الكائن داخل "live"
+      const liveData = data.live;
+
       // إظهار أو إخفاء الشارة حسب القيمة فى JSON
-      if (data.isLive) {
+      if (liveData && liveData.isLive === true) {
         liveBadge.style.display = "block";
       } else {
         liveBadge.style.display = "none";
       }
+
     } catch (error) {
       console.error("Error loading live status:", error);
     }
   }
 
-  // نعمل التحقق أول مرة عند فتح الصفحة
+  // التحقق أول مرة عند فتح الصفحة
   await checkLiveStatus();
 
-  // ونحدثها تلقائياً كل 5 ثوانى (تقدر تغير المدة لو عايز)
+  // التحديث التلقائي كل 5 ثواني
   setInterval(checkLiveStatus, 5000);
 });
