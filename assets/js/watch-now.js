@@ -155,7 +155,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       isLive: true // false → يظهر No-live
     };
 
-    localStorage.setItem("isLiveNow", videoItem.isLive ? "true" : "false");
+    // بدل ما نحفظ فى localStorage، نحدّث ملف live-status.json عن طريق PHP
+    fetch(`scripts/update-live.php?status=${videoItem.isLive ? "true" : "false"}`)
+      .then(res => res.text())
+      .then(msg => console.log(msg))
+      .catch(err => console.error("Error updating live status:", err));
+
 
     const liveBadge = document.getElementById("liveBadge");
 
