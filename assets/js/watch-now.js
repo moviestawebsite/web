@@ -152,15 +152,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     // مثال: اختر الفيديو من JSON أو ضع رابط مباشر
     const videoItem = {
       url: "https://www.dropbox.com/scl/fi/zyz1cp6x6nc8bhqra5uy7/Anyone-but-you.mp4?rlkey=ydiuh3lv649yibf3ocfplneqr&st=z5wmewiu&dl=0", // رابط الفيديو
-      isLive: true // false → يظهر No-live
+      isLive: true // أو false حسب حالة البث
     };
 
-    // بدل ما نحفظ فى localStorage، نحدّث ملف live-status.json عن طريق PHP
-    fetch(`scripts/update-live.php?status=${videoItem.isLive ? "true" : "false"}`)
+    // إرسال الحالة إلى PHP لتحديث live-status.json
+    fetch(`../php/update-live.php?status=${videoItem.isLive ? "true" : "false"}`)
       .then(res => res.text())
       .then(msg => console.log(msg))
       .catch(err => console.error("Error updating live status:", err));
-
 
     const liveBadge = document.getElementById("liveBadge");
 
