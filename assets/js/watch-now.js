@@ -230,41 +230,41 @@ function openPopup(item) {
   overlay.classList.add("popup-overlay");
 
   overlay.innerHTML = `
-    <span class="close-popup" onclick="this.closest('.popup-overlay').remove()">
-      <i class="fa-solid fa-xmark"></i>
-    </span>
+  <span class="close-popup" onclick="this.closest('.popup-overlay').remove()">
+    <i class="fa-solid fa-xmark"></i>
+  </span>
 
-    <div class="popup-box">
-      <div class="popup-header">
-        <div class="left">
-          <img src="../images/logo.png" alt="logo">
-          <span class="header-img-text">Moviesta</span>
-        </div>
-        <div class="right-buttons">
-          <button class="icon-btn download" title="Add to favorites"><i class="fa-solid fa-heart-circle-plus"></i></button>
-          <button class="icon-btn edit" title="Edit"><i class="fa-solid fa-sliders"></i></button>
-          <button class="icon-btn ai" title="AI Assistant"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-          <button class="icon-btn refine" title="Refine"><i class="fa-solid fa-pen"></i></button>
-          <div class="divider"></div>
-          <button class="open" onclick="window.open('${item.page}', '_blank')">
-            <i class="fa-solid fa-up-right-from-square"></i> Open the page
-          </button>
-        </div>
+  <div class="popup-box">
+    <div class="popup-header">
+      <div class="left">
+        <img src="../images/logo.png" alt="logo">
+        <span class="header-img-text">Moviesta</span>
       </div>
+      <div class="right-buttons">
+        <button class="icon-btn download" title="Add to favorites"><i class="fa-solid fa-heart-circle-plus"></i></button>
+        <button class="icon-btn edit" title="Edit"><i class="fa-solid fa-sliders"></i></button>
+        <button class="icon-btn ai" title="AI Assistant"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+        <button class="icon-btn refine" title="Refine"><i class="fa-solid fa-pen"></i></button>
+        <div class="divider"></div>
+        <button class="open" onclick="window.open('${item.page}', '_blank')">
+          <i class="fa-solid fa-up-right-from-square"></i> Open the page
+        </button>
+      </div>
+    </div>
 
-      <div class="popup-scroll">
-        <div class="popup-content">
-          <h1 style="margin-top: 50px;"><i class="fa-solid fa-film"></i> ${item.title}</h1>
-          <section>
-            <div class="container-control">
-              <div class="video_player">
-                <video preload="metadata" class="main-video">
-                  <source src="${item.video_url_720}" size="720" type="video/mp4">
-                </video>
-              </div>
+    <div class="popup-scroll">
+      <div class="popup-content">
+        <h1 style="margin-top: 50px;"><i class="fa-solid fa-film"></i> ${item.title}</h1>
+        <section>
+          <div class="container-control">
+            <div class="video_player">
+              <video preload="metadata" class="main-video">
+                <source src="${item.video_url_720}" size="720" type="video/mp4">
+              </video>
             </div>
-          </section>
-        
+          </div>
+        </section>
+      
         <div class="movie-details-split">
           <div class="left-details">
             <h2>Details:</h2><br>
@@ -275,15 +275,20 @@ function openPopup(item) {
             </ul>
           </div>
               
-            <div class="right-details">
+          <div class="right-details">
+            <h2>More Info:</h2><br>
+            <ul>
               <li><i class="fa-solid fa-user"></i> <strong>Director:</strong> ${item.useres}</li>
               <li><i class="fa-solid fa-star"></i> <strong>IMDb Rating:</strong> ${item.rating}/10</li>
               <li><i class="fa-solid fa-clock"></i> <strong>Duration:</strong> ${item.time}</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  `;
+  </div>
+`;
+
 
   document.body.appendChild(overlay);
   setTimeout(() => {
