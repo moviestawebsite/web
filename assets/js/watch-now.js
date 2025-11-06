@@ -266,7 +266,6 @@ function openPopup(item) {
         </section>
       
         <div class="movie-details-split">
-          <h2>Details :</h2>
           <div class="left-details">
             <ul>
               <li><i class="fa-solid fa-film"></i> <strong>Movie Name:</strong> ${item.title}</li>
