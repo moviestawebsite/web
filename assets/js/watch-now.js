@@ -267,7 +267,7 @@ function openPopup(item) {
       
         <div class="movie-details-split">
           <div class="left-details">
-            <h2>Details:</h2><br>
+            <h2></h2>
             <ul>
               <li><i class="fa-solid fa-film"></i> <strong>Movie Name:</strong> ${item.title}</li>
               <li><i class="fa-regular fa-calendar"></i> <strong>Release Date:</strong> ${item.date}</li>
@@ -276,7 +276,6 @@ function openPopup(item) {
           </div>
               
           <div class="right-details">
-            <h2>More Info:</h2><br>
             <ul>
               <li><i class="fa-solid fa-user"></i> <strong>Director:</strong> ${item.useres}</li>
               <li><i class="fa-solid fa-star"></i> <strong>IMDb Rating:</strong> ${item.rating}/10</li>
@@ -288,7 +287,6 @@ function openPopup(item) {
     </div>
   </div>
 `;
-
 
   document.body.appendChild(overlay);
   setTimeout(() => {
