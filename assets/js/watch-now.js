@@ -295,26 +295,47 @@ function openPopup(item) {
     initializeAllVideoPlayers();
   }, 3500);
   fixDropboxLinks();
-  // بعد إدراج overlay
+  // أولاً نحضر زر المفضلة
   const downloadBtn = overlay.querySelector('.icon-btn.download');
 
+  // نحدد معرف الفيلم أو عنوانه كمفتاح لحفظه في localStorage
+  const movieId = item.title; // ممكن تستخدم أي معرف فريد
+
+  // دالة لتحديث الزر حسب حالة المفضلة
+  function updateFavoriteBtn() {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    if (favorites.includes(movieId)) {
+      downloadBtn.querySelector('i').className = 'fa-solid fa-heart-circle-check';
+      downloadBtn.querySelector('i').style.color = '#FF6B6B'; // أحمر فاتح
+      downloadBtn.title = 'Added';
+    } else {
+      downloadBtn.querySelector('i').className = 'fa-solid fa-heart-circle-plus';
+      downloadBtn.querySelector('i').style.color = ''; // اللون الافتراضي
+      downloadBtn.title = 'Add to favorites';
+    }
+  }
+
+  // حدث الضغط على الزر
   downloadBtn.addEventListener('click', () => {
-    const icon = downloadBtn.querySelector('i');
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-    // غيّر الأيقونة من القلب لعلامة صح داخل القلب
-    icon.className = 'fa-solid fa-heart-circle-check';
+    if (favorites.includes(movieId)) {
+      // إذا موجود مسبقاً، نحذفه
+      favorites = favorites.filter(fav => fav !== movieId);
+    } else {
+      // إذا مش موجود، نضيفه
+      favorites.push(movieId);
+    }
 
-    // غيّر اللون للأحمر خافت
-    icon.style.color = '#ff5d5dff'; // ممكن تغيّر اللون حسب رغبتك
+    // نحفظ المفضلة في localStorage
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 
-    // غيّر الـ tooltip
-    downloadBtn.title = 'Added';
-
-    // منع أي تغييرات لاحقة عند الضغط مرة ثانية
-    downloadBtn.disabled = true;
-    downloadBtn.style.cursor = 'default';
+    // نحدث الزر بناءً على الحالة الجديدة
+    updateFavoriteBtn();
   });
 
+  // نشغل التحديث عند تحميل overlay للتأكد من أن الزر يظهر بشكل صحيح
+  updateFavoriteBtn();
 }
 
 // ======================= كود تهيئة مشغل الفيديوهات في الصفحة أو الـ Popup =======================
