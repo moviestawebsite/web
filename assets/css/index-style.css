@@ -944,7 +944,7 @@ body.dark-theme .theme-tog-track .theme-indic {
     max-width: 800px;
     margin-top: 20px;
     align-items: flex-start;
-    gap: 20px; /* المسافة بين العمودين */
+    gap: 20px;
 }
 
 .left-details,
@@ -953,7 +953,6 @@ body.dark-theme .theme-tog-track .theme-indic {
     color: var(--color-text-primary);
 }
 
-/* قائمة التفاصيل */
 .movie-details-split ul {
     list-style: none;
     padding: 0;
@@ -963,7 +962,7 @@ body.dark-theme .theme-tog-track .theme-indic {
 .movie-details-split li {
     display: flex;
     align-items: center;
-    gap: 8px; /* المسافة بين الأيقونة والنص */
+    gap: 8px;
     margin-bottom: 6px;
     line-height: 1.5;
 }
@@ -974,15 +973,13 @@ body.dark-theme .theme-tog-track .theme-indic {
     text-align: center;
 }
 
-/* تفاصيل العمود اليمين */
 .right-details li i {
     color: var(--color-hover-primary);
 }
 
-/* تقييم النجوم */
 .right-details .rating {
     display: flex;
-    flex-direction: row-reverse; /* نجوم من اليمين لليسار */
+    flex-direction: row-reverse;
     justify-content: flex-end;
     gap: 5px;
     list-style: none;
@@ -1002,11 +999,10 @@ body.dark-theme .theme-tog-track .theme-indic {
     transition: color 0.5s ease;
 }
 
-/* تأثير تغيير اللون عند التحديد أو المرور بالفأرة */
 .right-details .rating li.selected i,
 .right-details .rating li:hover i,
-.right-details .rating li:hover ~ li i {
-    color: #FFD700; /* لون ذهبي للنجوم */
+.right-details .rating li:hover~li i {
+    color: #FFD700;
 }
 
 ul {
