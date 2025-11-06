@@ -275,9 +275,8 @@ function openPopup(item) {
               </ul>
               </div>
               
-              <div class="divider1"></div>
-              <br><br>
               <div class="right-details">
+              <br><br><br>
               <li><i class="fa-solid fa-user"></i> <strong>Director:</strong> ${item.useres}</li>
               <li><i class="fa-solid fa-star"></i> <strong>IMDb Rating:</strong> ${item.rating}/10</li>
               <li><i class="fa-solid fa-clock"></i> <strong>Duration:</strong> ${item.time}</li>
