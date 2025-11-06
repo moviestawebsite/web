@@ -229,7 +229,7 @@ function openPopup(item) {
   const overlay = document.createElement("div");
   overlay.classList.add("popup-overlay");
 
-  overlay.innerHTML = `
+overlay.innerHTML = `
   <span class="close-popup" onclick="this.closest('.popup-overlay').remove()">
     <i class="fa-solid fa-xmark"></i>
   </span>
@@ -267,6 +267,7 @@ function openPopup(item) {
       
         <div class="movie-details-split">
           <div class="left-details">
+            <h2>Details:</h2><br>
             <ul>
               <li><i class="fa-solid fa-film"></i> <strong>Movie Name:</strong> ${item.title}</li>
               <li><i class="fa-regular fa-calendar"></i> <strong>Release Date:</strong> ${item.date}</li>
