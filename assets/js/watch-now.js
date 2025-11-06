@@ -264,23 +264,24 @@ overlay.innerHTML = `
             </div>
           </div>
         </section>
-      
+
         <div class="movie-details-split">
-          <div class="left-details">
-            <h2>Details:</h2><br>
-            <ul>
-              <li><i class="fa-solid fa-film"></i> <strong>Movie Name:</strong> ${item.title}</li>
-              <li><i class="fa-regular fa-calendar"></i> <strong>Release Date:</strong> ${item.date}</li>
-              <li><i class="fa-solid fa-clapperboard"></i> <strong>Genre:</strong> ${item.cem}</li>
-            </ul>
-          </div>
-              
-          <div class="right-details">
-            <ul>
-              <li><i class="fa-solid fa-user"></i> <strong>Director:</strong> ${item.useres}</li>
-              <li><i class="fa-solid fa-star"></i> <strong>IMDb Rating:</strong> ${item.rating}/10</li>
-              <li><i class="fa-solid fa-clock"></i> <strong>Duration:</strong> ${item.time}</li>
-            </ul>
+          <!-- الصف الأول -->
+          <div class="details-row">
+            <div class="left-details">
+              <ul>
+                <li><i class="fa-solid fa-film"></i> <strong>Movie Name:</strong> ${item.title}</li>
+                <li><i class="fa-regular fa-calendar"></i> <strong>Release Date:</strong> ${item.date}</li>
+                <li><i class="fa-solid fa-clapperboard"></i> <strong>Genre:</strong> ${item.cem}</li>
+              </ul>
+            </div>
+            <div class="right-details">
+              <ul>
+                <li><i class="fa-solid fa-user"></i> <strong>Director:</strong> ${item.useres}</li>
+                <li><i class="fa-solid fa-star"></i> <strong>IMDb Rating:</strong> ${item.rating}/10</li>
+                <li><i class="fa-solid fa-clock"></i> <strong>Duration:</strong> ${item.time}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
