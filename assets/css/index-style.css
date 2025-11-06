@@ -37,6 +37,8 @@
     --tiny-font-size: .625rem;
     --z-tooltip: 10;
     --z-fixed: 100;
+    --color-bg-btn-popup: #1f2936;
+    --color-txt-btn-popup: #fff;
 }
 
 body.dark-theme {
@@ -50,6 +52,8 @@ body.dark-theme {
     --color-shadow: rgba(0, 0, 0, 0.3);
     --color-bg-cards: #1a1a1a;
     --color-open-btn: rgba(225, 225, 225, 0.15);
+    --color-bg-btn-popup: #fff;
+    --color-txt-btn-popup: #1f2936;
 }
 
 body {
@@ -910,6 +914,27 @@ body.dark-theme .theme-tog-track .theme-indic {
     background: #000;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
     object-fit: contain;
+}
+
+.btn{
+    border: none;
+    padding: 13px 30px;
+    border-radius: 8px;
+    background-color: var(--color-bg-btn-popup);
+    color: var(--color-txt-btn-popup);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+}
+
+.btn.fav.active2{
+    background-color: var(--color-hover-primary);
+    color: var(--color-text-primary);
+    box-shadow: 0 0 20px var(--color-hover-primary);
+}
+
+.btn.fav:hover{
+    box-shadow: 0 0 15px white;
 }
 
 .movie-details-split {

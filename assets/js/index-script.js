@@ -7,7 +7,6 @@ const search = document.querySelector(".search");
 const body = document.querySelector("body");
 const searchInput = document.querySelector(".search input");
 const clearBtn = document.querySelector(".clear-search");
-
 // ======================= تبديل الثيم =======================
 const updateico = () => {
   const isDark = body.classList.contains("dark-theme");
@@ -70,26 +69,26 @@ async function loadMovies() {
 
     // ✅ السلايدر الأساسي
     // ✅ تحميل السلايدر من ملف JSON
-const sliderData = data.slider || [];
-if (sliderData.length > 0) {
-  const sliderItemsHTML = sliderData
-    .map((slide) => {
-      const imgURL = fixDropboxLink(slide.img);
-      return `
+    const sliderData = data.slider || [];
+    if (sliderData.length > 0) {
+      const sliderItemsHTML = sliderData
+        .map((slide) => {
+          const imgURL = fixDropboxLink(slide.img);
+          return `
         <div class="item">
           <a href="${slide.link}">
             <img src="${imgURL}" alt="">
           </a>
         </div>
       `;
-    })
-    .join("");
+        })
+        .join("");
 
-  const dotsHTML = sliderData
-    .map((_, i) => `<li${i === 0 ? ' class="active"' : ""}></li>`)
-    .join("");
+      const dotsHTML = sliderData
+        .map((_, i) => `<li${i === 0 ? ' class="active"' : ""}></li>`)
+        .join("");
 
-  const sliderHTML = `
+      const sliderHTML = `
     <div class="slider">
       <div class="list">
         ${sliderItemsHTML}
@@ -101,9 +100,9 @@ if (sliderData.length > 0) {
       <ul class="dots">${dotsHTML}</ul>
     </div>
   `;
-  mainContainer.insertAdjacentHTML("beforeend", sliderHTML);
-  initSlider();
-}
+      mainContainer.insertAdjacentHTML("beforeend", sliderHTML);
+      initSlider();
+    }
 
 
     // ✅ تحميل كل قسم أفلام

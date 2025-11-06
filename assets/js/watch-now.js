@@ -8,6 +8,8 @@ const body = document.querySelector("body");
 const searchInput = document.querySelector(".search input");
 const clearBtn = document.querySelector(".clear-search");
 const mainContainer = document.getElementById("mainContainer");
+const favBtn = document.querySelector(".btn.fav");
+
 
 // ======================= إعداد الأيقونة =======================
 const updateico = () => {
@@ -280,7 +282,7 @@ function openPopup(item) {
 
           <div class="right-details">
             <br><br>
-            <button><i class="fa-solid fa-heart"></i> Add to favorites</button>
+            <button class="btn fav"><i class="fa-solid fa-heart"></i> Add to favorites</button>
           </div>
         </div>
       </div>
@@ -292,7 +294,20 @@ function openPopup(item) {
     loader1.style.display = "none";
     initializeAllVideoPlayers();
   }, 3500);
-  fixDropboxLinks()
+  fixDropboxLinks();
+  // بعد إنشاء البوب أب
+  const favBtn = overlay.querySelector(".btn.fav");
+  favBtn.addEventListener("click", () => {
+    favBtn.classList.toggle("active2");
+
+    // كمان نغيّر الأيقونة والنص لما تتفاعل
+    if (favBtn.classList.contains("active2")) {
+      favBtn.innerHTML = `<i class="fa-solid fa-heart-circle-check"></i> Added to favorites`;
+    } else {
+      favBtn.innerHTML = `<i class="fa-solid fa-heart"></i> Add to favorites`;
+    }
+  });
+
 }
 
 // ======================= كود تهيئة مشغل الفيديوهات في الصفحة أو الـ Popup =======================
