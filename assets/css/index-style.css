@@ -939,7 +939,7 @@ body.dark-theme .theme-tog-track .theme-indic {
 
 .movie-details-split {
     display: flex;
-    justify-content: space-between; /* يبعد اليمين عن الشمال */
+    justify-content: space-between;
     width: 100%;
     max-width: 800px;
     margin-top: 20px;
