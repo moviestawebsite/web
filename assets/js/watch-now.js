@@ -295,27 +295,25 @@ function openPopup(item) {
     initializeAllVideoPlayers();
   }, 3500);
   fixDropboxLinks();
-  // بعد إنشاء البوب أب
-  // بعد إدراج الـ overlay
+  // بعد إدراج overlay
   const downloadBtn = overlay.querySelector('.icon-btn.download');
 
-  // حدث الضغط على الزر
   downloadBtn.addEventListener('click', () => {
     const icon = downloadBtn.querySelector('i');
 
-    // غيّر الأيقونة من القلب لعلامة صح
-    icon.className = 'fa-solid fa-circle-check';
+    // غيّر الأيقونة من القلب لعلامة صح داخل القلب
+    icon.className = 'fa-solid fa-heart-circle-check';
+
+    // غيّر اللون للأحمر خافت
+    icon.style.color = '#FF6B6B'; // ممكن تغيّر اللون حسب رغبتك
 
     // غيّر الـ tooltip
     downloadBtn.title = 'Added';
 
-    // اختفاء tooltip بعد 2 ثانية (يمكن تغييره)
-    setTimeout(() => {
-      downloadBtn.title = 'Add to favorites';
-      icon.className = 'fa-solid fa-heart-circle-plus';
-    }, 2000);
+    // منع أي تغييرات لاحقة عند الضغط مرة ثانية
+    downloadBtn.disabled = true;
+    downloadBtn.style.cursor = 'default';
   });
-
 
 }
 
