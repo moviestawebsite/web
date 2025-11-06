@@ -229,7 +229,7 @@ function openPopup(item) {
   const overlay = document.createElement("div");
   overlay.classList.add("popup-overlay");
 
-overlay.innerHTML = `
+  overlay.innerHTML = `
   <span class="close-popup" onclick="this.closest('.popup-overlay').remove()">
     <i class="fa-solid fa-xmark"></i>
   </span>
@@ -296,17 +296,26 @@ overlay.innerHTML = `
   }, 3500);
   fixDropboxLinks();
   // بعد إنشاء البوب أب
-  const favBtn = overlay.querySelector(".btn.fav");
-  favBtn.addEventListener("click", () => {
-    favBtn.classList.toggle("active2");
+  // بعد إدراج الـ overlay
+  const downloadBtn = overlay.querySelector('.icon-btn.download');
 
-    // كمان نغيّر الأيقونة والنص لما تتفاعل
-    if (favBtn.classList.contains("active2")) {
-      favBtn.innerHTML = `<i class="fa-solid fa-heart-circle-check"></i> Added to favorites`;
-    } else {
-      favBtn.innerHTML = `<i class="fa-solid fa-heart"></i> Add to favorites`;
-    }
+  // حدث الضغط على الزر
+  downloadBtn.addEventListener('click', () => {
+    const icon = downloadBtn.querySelector('i');
+
+    // غيّر الأيقونة من القلب لعلامة صح
+    icon.className = 'fa-solid fa-circle-check';
+
+    // غيّر الـ tooltip
+    downloadBtn.title = 'Added';
+
+    // اختفاء tooltip بعد 2 ثانية (يمكن تغييره)
+    setTimeout(() => {
+      downloadBtn.title = 'Add to favorites';
+      icon.className = 'fa-solid fa-heart-circle-plus';
+    }, 2000);
   });
+
 
 }
 
