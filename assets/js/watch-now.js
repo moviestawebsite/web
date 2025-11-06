@@ -305,7 +305,7 @@ function openPopup(item) {
     icon.className = 'fa-solid fa-heart-circle-check';
 
     // غيّر اللون للأحمر خافت
-    icon.style.color = '#FF6B6B'; // ممكن تغيّر اللون حسب رغبتك
+    icon.style.color = '#ff5d5dff'; // ممكن تغيّر اللون حسب رغبتك
 
     // غيّر الـ tooltip
     downloadBtn.title = 'Added';
