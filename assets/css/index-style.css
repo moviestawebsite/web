@@ -39,6 +39,7 @@
     --z-fixed: 100;
     --color-bg-btn-popup: #1f2936;
     --color-txt-btn-popup: #fff;
+    --color-img-hover: ;
 }
 
 body.dark-theme {
