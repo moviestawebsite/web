@@ -703,9 +703,8 @@ body.dark-theme .theme-tog-track .theme-indic {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease;
     display: block;
-    transition: transform 0.25s ease box-shadow 0.25s ease;
+    transition: all 0.25s ease;
 }
 
 .media-card img:hover {
