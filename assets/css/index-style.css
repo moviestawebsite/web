@@ -39,7 +39,7 @@
     --z-fixed: 100;
     --color-bg-btn-popup: #1f2936;
     --color-txt-btn-popup: #fff;
-    --color-img-hover: ;
+    --color-img-hover: #fff;
 }
 
 body.dark-theme {
@@ -55,6 +55,7 @@ body.dark-theme {
     --color-open-btn: rgba(225, 225, 225, 0.15);
     --color-bg-btn-popup: #fff;
     --color-txt-btn-popup: #1f2936;
+    --color-img-hover: #111;
 }
 
 body {
