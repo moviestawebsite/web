@@ -709,6 +709,7 @@ body.dark-theme .theme-tog-track .theme-indic {
 
 .media-card img:hover {
     transform: scale(1.05);
+    box-shadow: var(--color-img-hover);
 }
 
 .media-card::after {
