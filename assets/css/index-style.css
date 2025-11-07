@@ -705,12 +705,12 @@ body.dark-theme .theme-tog-track .theme-indic {
     object-fit: cover;
     transition: opacity 0.3s ease;
     display: block;
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease box-shadow 0.25s ease;
 }
 
 .media-card img:hover {
     transform: scale(1.05);
-    box-shadow: var(--color-img-hover);
+    box-shadow: 0 0 20px var(--color-img-hover);
 }
 
 .media-card::after {
